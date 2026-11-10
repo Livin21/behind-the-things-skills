@@ -1,0 +1,35 @@
+{
+ "target_lufs": -16.9,
+ "xfade": 3.0,
+ "sections": [
+  {
+   "src": "assets/music/m1.mp3",
+   "until": "ch03"
+  },
+  {
+   "src": "assets/music/m2.mp3",
+   "until": "ch05"
+  },
+  {
+   "src": "assets/music/m3.mp3",
+   "until": "ch07"
+  },
+  {
+   "src": "assets/music/m1.mp3",
+   "align": "end",
+   "end_trim": 1.45
+  }
+ ],
+ "drops": [
+  {
+   "chapter": "ch05",
+   "from": 46.03,
+   "to": 48.24
+  }
+ ],
+ "lift": {
+  "chapter": "ch07",
+  "after_vo": 0.4,
+  "gain_db": 5.0
+ }
+}

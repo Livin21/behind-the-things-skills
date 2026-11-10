@@ -1,0 +1,42 @@
+<!-- Chapter skeleton. Copy to compositions/chNN.html, replace every "chNN" with the chapter id,
+     and set data-duration to the chapter's duration from chapters.json.
+     Rules:
+     - Every id starts with "chNN-" (chapters share one DOM in the final render).
+     - Use classes from lib/btt.css; never redefine tokens or fonts here.
+     - Text-safe x 96-1824, y 64-940. The brand tag (top-left) and chapter indicator (top-right) live in the root.
+     - The hero object is fully drawn at the chapter's first frame unless the chapter opens on a title.
+     - Times are chapter-local. Narration starts at vo_at (chapters.json); cue visuals to transcript times + vo_at.
+     - End state: everything still visible at the last frame (the next chapter's wipe or title covers it). -->
+<template id="chNN-template">
+  <div data-composition-id="chNN" data-width="1920" data-height="1080" data-duration="30">
+    <div class="stage" id="chNN-stage">
+      <!-- hero drawing -->
+      <svg class="abs" style="left:0;top:0" viewBox="0 0 1920 1080" width="1920" height="1080">
+        <rect id="chNN-box" class="f-hi s-ink" x="760" y="300" width="400" height="300" rx="24" stroke-width="6" />
+      </svg>
+      <div class="callout" id="chNN-c1" style="left:1160px;top:420px"><span class="dot"></span><span class="lead"></span><span class="tag">LABEL</span></div>
+    </div>
+    <div class="lower3" id="chNN-l3"><div class="k"><i></i>CHAPTER NN</div><div class="t">Chapter title</div></div>
+    <div class="wipe" id="chNN-wipe"></div>      <!-- cuts inside the chapter (K.wipe) -->
+    <div class="wipe" id="chNN-wipein"></div>    <!-- remove in chapter 1 and at a match cut -->
+    <div class="wipe" id="chNN-wipeout"></div>   <!-- remove in the last chapter -->
+    <script>
+    (function () {
+      window.__timelines = window.__timelines || {};
+      var tl = gsap.timeline({ paused: true });
+      var K = BTT.kit(tl, "chNN");
+      var DUR = 30;
+      K.push("#chNN-stage", 0, DUR);
+      K.card("#chNN-l3", 0.4, 4);
+      K.callout("chNN-c1", 2.0);
+      // K.wipe("#chNN-wipe", 15.0);  // a scene cut inside the chapter at t = 15.0
+      gsap.set("#chNN-wipe", { yPercent: 102 });
+      // chapter boundaries (see the brief): leave under the incoming wipe, end under the outgoing one
+      gsap.set("#chNN-wipein", { yPercent: 0 }); tl.to("#chNN-wipein", { yPercent: -102, duration: 0.3, ease: "power3.out" }, 0);
+      gsap.set("#chNN-wipeout", { yPercent: 102 }); tl.to("#chNN-wipeout", { yPercent: 0, duration: 0.25, ease: "power3.in" }, DUR - 0.25);
+      K.end(DUR);
+      window.__timelines["chNN"] = tl;
+    })();
+    </script>
+  </div>
+</template>

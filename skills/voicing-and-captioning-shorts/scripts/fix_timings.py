@@ -68,6 +68,8 @@ def main():
                 and words[cands[0] + 1]["start"] >= e - 0.1:
             i = cands.pop(0)
             prev_end = words[i - 1]["end"] if i else 0.0
+            if prev_end > s - MIN_WORD:   # no room before the pause: leave this word where it is
+                moved.add(i); continue
             dur = min(max(orig[i]["end"] - orig[i]["start"], 0.2), 0.6)
             ns = max(prev_end, s - dur)
             say(i, "move", words[i]["start"], ns)
@@ -99,6 +101,9 @@ def main():
     short = [w["text"] for w in words if w["end"] - w["start"] < 0.08 and len(re.sub(r"\W", "", w["text"])) >= 4]
     if short:
         print(f"WARN   very short words, check by hand: {short}")
+    inverted = [w["text"] for w in words if w["end"] <= w["start"]]
+    if inverted:
+        sys.exit(f"Words that end before they start, fix by hand: {inverted[:5]}")
     bad = [(x["text"], y["text"]) for x, y in zip(words, words[1:]) if y["start"] < x["start"] or x["end"] > y["start"] + 0.001]
     if bad:
         sys.exit(f"Out-of-order or overlapping words, fix by hand: {bad[:5]}")

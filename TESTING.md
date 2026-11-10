@@ -87,3 +87,28 @@ All 11 were fixed.
 - Two wording mismatches.
 
 All 5 were fixed. The review stage now requires the listen before release time; scheduling earlier is allowed, but a problem found then means replacing the upload or unscheduling everywhere.
+
+## v1.3: long-form, from producing L01 (6:55, 16:9)
+
+The skill `making-long-form-explainers` was written after producing the first long video, "Behind the Blue Dot". Production used a lead plus six parallel chapter agents.
+
+**Failures seen during production, which the skill now covers:**
+- **GSAP and SVG transforms:** GSAP replaced an SVG group's translate, so satellites jumped off-canvas.
+- **Previews:** preview files next to `index.html` failed `check`.
+- **First frames:** `tl.set(…, 0)` hides didn't apply on a chapter's first frame.
+- **Reveals:** two `fromTo` reveals were invisible in multi-worker renders.
+- **Dashed lines:** dashed lines turned solid under a stroke-draw.
+- **Chapter indicator:** it counted chapters without the cold open.
+- **Music:** the music bed ended on a generated track's silent tail, leaving 3 s of silence under the end card.
+- **`fix_timings.py`:** it could produce words that end before they start. v4 fixes this and fails loudly.
+
+**Retrieval test:** a fresh agent answered 8 scenarios from the skill alone and found 10 problems. The most serious:
+- The chapter brief still taught the `tl.set(…, 0)` hide.
+- There was no setup step.
+- Transcripts overwrote each other.
+- The duration formulas were missing.
+- The pause splice had no tool.
+- TTS respellings would leak into captions.
+- There were no end-card instructions and no release steps.
+
+All of them were fixed: a setup stage, exact voice commands, `splice_pause.py`, `timestamps.txt`, an integration review, reference files, and brief updates.

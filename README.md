@@ -13,6 +13,7 @@ Each skill is a folder with a `SKILL.md`, in the [Agent Skills](https://agentski
 | [`voicing-and-captioning-shorts`](skills/voicing-and-captioning-shorts/SKILL.md) | TTS narration, loudness, word timings, speech-synced captions, a music bed |
 | [`animating-shorts-in-hyperframes`](skills/animating-shorts-in-hyperframes/SKILL.md) | Building the 1080×1920 animation in [HyperFrames](https://hyperframes.heygen.com) from a tested template |
 | [`publishing-shorts`](skills/publishing-shorts/SKILL.md) | Scheduling on YouTube Shorts, Instagram Reels and your site at one release time |
+| [`making-long-form-explainers`](skills/making-long-form-explainers/SKILL.md) | A 6–8 minute 16:9 explainer from the same pipeline: deciding, chapters, parallel chapter agents, music sections, SRT, release |
 
 ## Install
 ```bash

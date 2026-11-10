@@ -18,3 +18,4 @@
 | 14 | "Inactive" icon parts are invisible | Shade-coloured fills on the paper background | Give inactive parts an ink-2 outline |
 | 15 | SVG `<text>` in the wrong font | `.tag` styles don't reach into SVG | Give SVG text its own font class |
 | 16 | Contrast or type check flags a counter or readout | `check` measures text at whatever value it holds at the sample time | Expected; confirm the final value visually |
+| 17 | A drawing jumps to the top-left when tweened | GSAP `x`/`y`/`scale` on an SVG `<g>` that has `transform="translate(...)"` replaces that translate | Tween an outer wrapper with no transform attribute; the inner group keeps the placement |

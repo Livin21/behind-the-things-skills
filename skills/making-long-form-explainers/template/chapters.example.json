@@ -1,0 +1,63 @@
+{
+ "id": "l01-slug",
+ "thing": "THING",
+ "fps": 30,
+ "scripts": [
+  "lib/drawings.js"
+ ],
+ "tail": 0,
+ "chrome_off": {
+  "chapter": "ch02",
+  "after_vo": 0.2
+ },
+ "music": {
+  "src": "assets/music/bed.mp3",
+  "volume": 0.28
+ },
+ "caption_display": [
+  [
+   "twenty-four",
+   "24"
+  ],
+  [
+   "three hundred",
+   "300"
+  ]
+ ],
+ "chapters": [
+  {
+   "id": "ch01",
+   "title": "Cold open title",
+   "indicator": false,
+   "duration": 40.3,
+   "vo": "assets/vo/ch01_norm.wav",
+   "vo_at": 0.25,
+   "vo_duration": 38.6,
+   "script": "../narration/ch01.txt",
+   "transcript": "assets/vo/ch01.transcript.json"
+  },
+  {
+   "id": "ch02",
+   "title": "Second chapter title",
+   "indicator": true,
+   "duration": 63.5,
+   "vo": "assets/vo/ch02_norm.wav",
+   "vo_at": 1.2,
+   "vo_duration": 60.9,
+   "script": "../narration/ch02.txt",
+   "transcript": "assets/vo/ch02.transcript.json"
+  }
+ ],
+ "fonts": [
+  {
+   "family": "Archivo",
+   "src": "assets/fonts/Archivo-VF.woff2",
+   "weight": "100 900"
+  },
+  {
+   "family": "IBM Plex Mono",
+   "src": "assets/fonts/IBMPlexMono-500.woff2",
+   "weight": "500"
+  }
+ ]
+}
