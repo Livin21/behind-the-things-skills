@@ -44,7 +44,8 @@ Run in `video/`; raw takes are `assets/vo/chNN.mp3`.
 
 ## Voice and pauses
 - Pace varies by chapter (2.5–2.9 words per second); flag the fastest chapter for the human listen.
-- **A deliberate silence** (a reveal): `python3 -I splice_pause.py assets/vo/chNN_norm.wav assets/vo/chNN.transcript.json <mid-pause s> <seconds to add>`. It splices silence into the wav and shifts the later words. Then update that chapter's `vo_duration` and `duration`, and add a `drops` entry to `bed.json` from the previous word's end to the next word's start (voice time), so the music drops out too.
+- **Keep a reveal pause short, with the music under it.** On L01 a 2.2 s pause with the bed dropped out read as an awkward dead gap to the owner; 0.8 s with the music continuing worked. Give drama with the picture (a held frame, a slow push), not with silence.
+- **A deliberate pause** (a reveal): `python3 -I splice_pause.py assets/vo/chNN_norm.wav assets/vo/chNN.transcript.json <mid-pause s> <seconds to add>`. It splices silence into the wav and shifts the later words. Then update that chapter's `vo_duration` and `duration`, and if you really want the music out too, add a `drops` entry to `bed.json` (voice times, previous word's end to next word's start), but test it with a human first.
 
 ## Music bed
 - Three tracks in the same palette (prompt them as opening, mechanism, closing), each levelled to the bed target, crossfaded 3 s on chapter boundaries.
