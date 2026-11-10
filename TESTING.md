@@ -41,3 +41,19 @@ Each episode is produced by a fresh agent. Its brief contains only the topic, th
 All three agents avoided every RED-table animation trap that the v0 skill listed (wipe, fonts, push-in, SVG origin, off-canvas starts, overlaps). New failures they found are now traps 7, 9, 11, 13 and 14 in `traps.md`.
 
 **v1 verification:** a fresh agent answered 15 application questions using only the v1 skills. Covered: loudness maths, the frame-0 rule, token counts, cut placement, unopenable and contradictory sources, precedence, word cap, Instagram scheduling, handles, expected warnings, state changes, folder contents, account creation. All 15 were answered correctly, with file citations. It also reported 8 minor ambiguities (whether to re-normalise or only change `data-volume`, the cut position inside a pause, wording a corrected figure, hyphens in handles, the folder list, "two looks", the version pin, the cover timestamp); all 8 were fixed in v1.1. Episode 005's fix was redone with the v1 tools (`fix_timings.py`, `normalize_voice.sh`).
+
+## REFACTOR: testing the timing tool against hand-verified data
+
+The 005 agent re-ran its episode with `fix_timings.py` v1 and found 7 faults: a sentence-final word placed after its pause, words wholly inside a pause, crushed 0.02 s words, overlaps passing the check, words spanning a pause, a stale raw copy that could undo a re-voice, and no clamp to the audio length.
+
+Each candidate fix was scored against the agents' hand-verified transcripts for 005–007, counting words more than 0.15 s from the hand value:
+
+| Version | 005 onsets / ends | 006 onsets / ends | 007 onsets / ends | Notes |
+|---|---|---|---|---|
+| Raw Whisper | 16 / 35 | 3 / 19 | 11 / 17 | Baseline |
+| v1 (snap onsets, clamp ends) | 16 / 23 | 6 / 4 | 5 / 12 | Had the 7 faults above |
+| Segment-fit rewrite | 65 / – | 60 / – | 97 / – | **Rejected:** stretching whole segments distorted correct words |
+| Chunked re-transcription | 44 / – | 34 / – | 75 / – | **Not shipped:** the hand data is biased toward raw Whisper, so its benefit can't be shown |
+| **v3 (shipped)** | **16 / 22** | **5 / 8** | **4 / 7** | Targeted fixes for all 7 faults; idempotent; detects a changed audio file |
+
+Known limit (documented in the skill): a breath right after a pause can pull an onset early (006 "Lift"), and mid-sentence drift (005) still needs a one-sentence re-transcription.

@@ -23,8 +23,9 @@ All scripts live in this skill's `scripts/` folder. Call them by absolute path f
    - It writes `assets/transcript.json` next to the audio, **overwriting** any existing one: `[{"text","start","end",…}]`, one entry per token.
    - Do any extra transcriptions in a scratch folder.
 4. **Repair the timings.** Run `python3 -I fix_timings.py assets/narration.mp3 assets/transcript.json`.
-   - Whisper starts post-pause words up to 0.5 s late and stretches pre-pause words into the silence. The tool snaps both to `silencedetect` pauses, keeps the original as `transcript.raw.json`, and fails if the timings end up out of order.
-   - Read its printout. Clamp the last word's end to the audio length if it runs past.
+   - It fixes only the words around measured pauses: late onsets, sentence-final words pushed into a pause, and ends spanning a pause. It keeps `transcript.raw.json` and refreshes that copy if the audio changes. Re-runs are idempotent. It fails on out-of-order or overlapping words.
+   - **Read its printout.** A breath right after a pause can pull an onset too early. If a changed onset isn't followed by speech (spot-check with a 0.5 s `volumedetect` window), put the raw value back by hand. Do hand repairs after the last run.
+   - It can't fix drift in the middle of a long sentence. If a cut or emphasised caption lands mid-sentence and looks late, transcribe that sentence alone in a scratch folder (cut it with ffmpeg at its pauses), add the cut's start time, and copy those onsets in.
 5. **Flag pronunciation.** Transcribe again with `--model medium.en` in a scratch folder, then run
    `python3 -I diff_words.py narration.txt assets/transcript.json <scratch>/transcript.json`.
    Number-form differences ("55" vs "fifty-five") are fine. Put every other difference in your report as "listen at mm:ss". **A human listens to the hook and the flagged moments before release.**
