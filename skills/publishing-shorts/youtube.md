@@ -26,3 +26,19 @@
 
 ## Clicking reliably
 Prefer element refs from `find` over screen coordinates. If you do use coordinates, take a fresh screenshot after any window resize or scroll and measure again: a click at a stale position lands on the wrong control or on nothing. After a missed click, take a screenshot, read which step the dialog's stepper is on, and check the Audience and Visibility choices before you continue.
+
+## Long-form videos (16:9, verified on L01)
+1. **Upload:** the owner drags the master into Studio (browser tools cap uploads at about 10 MB). The draft appears under Content → Videos; open it with **Edit draft**. Details can be filled in while YouTube is still checking the file.
+2. **Details:**
+   - Title (cmd+A, type) and description, with the timestamps from `timestamps.txt`.
+   - **Don't press Escape** to close the hashtag suggestions: it closes the whole dialog. It autosaves, but you have to reopen the draft.
+   - Thumbnail: upload straight into the hidden `input[type=file]` in the Thumbnail section (no patch needed).
+   - Audience "not made for kids", Show more → paid promotion No, AI use No (per the listed cases), category Education.
+   - **Video language: English.** Without it, the Subtitles "Add" button stays disabled.
+3. **Video elements → Subtitles → Add → Upload file → With timing → Continue:** patch `HTMLInputElement.prototype.click` first (as in `instagram.md`), upload the `.srt` into the file input, then **Done**. Studio confirms "English subtitles published".
+4. **Visibility → Schedule:**
+   - Pick the day in the date picker.
+   - Click the time **input** by its `find` ref (coordinates missed it once and selected the page), cmd+A, type `19:30`, Return.
+   - Don't click the Schedule heading afterwards: it collapses the section. Read back the date and time, then click **Schedule**.
+   - The confirmation says "Your video will be set to public on <date> at <time>"; log the ID.
+
