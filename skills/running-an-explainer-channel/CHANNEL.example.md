@@ -11,7 +11,9 @@ Read this first, then `DESIGN.md`, then one finished episode (`episodes/<latest>
 | Tool versions | `hyperframes@<x.y.z>` |
 | Brand tag | `<pattern>` at `<position>` |
 | Sign-off line | "<fixed spoken line>"; card: `<lockup text>` |
+| Cadence line | "<release rhythm for captions and descriptions>", e.g. "New episodes Mon · Wed · Fri." |
 | Folders | `episodes/NNN-slug/` → `script.md`, `sources.md`, `narration.txt`, `video/` |
 | Release slot | `<days> at <time tz>` |
 | Publishing log | `<path>` |
+| Metrics | `<path>/METRICS.md` (48 h and 7-day numbers) |
 | Template token mapping | `--accent` = `<brand accent>`; `--flow` = `<flow colour>`; `--display` / `--mono` = `<fonts>` |

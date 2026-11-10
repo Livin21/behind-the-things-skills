@@ -19,8 +19,8 @@ Voice notes: <word → respelling used in the TTS prompt, if any>
 | 1 Hook | "Your microwave… inside out." | 0.00–3.4 | <object fully drawn at t = 0; named tags like `INSIDE OUT: MYTH`> | <the one highlighted thing> |
 
 ## Packaging
-- YouTube title: <curiosity + the object; the video pays it off>
-- Instagram first line: <the hook, rephrased>
+- YouTube title: <the question a viewer would type into search, which the video answers: "Does a Microwave Cook Food From the Inside Out?">
+- Instagram first line: <the hook, as one or two sentences; also the first line of the YouTube description>
 - First frame: <what t = 0 shows; must be the object>
 - Chosen cover: <a frame at about 2–3 s with the object and its caption; exported as renders/cover.jpg>
 ```

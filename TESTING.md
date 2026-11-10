@@ -57,3 +57,33 @@ Each candidate fix was scored against the agents' hand-verified transcripts for 
 | **v3 (shipped)** | **16 / 22** | **5 / 8** | **4 / 7** | Targeted fixes for all 7 faults; idempotent; detects a changed audio file |
 
 Known limit (documented in the skill): a breath right after a pause can pull an onset early (006 "Lift"), and mid-sentence drift (005) still needs a one-sentence re-transcription.
+
+## v1.2: publishing failures from the 005–007 release, then two retrieval tests
+
+Failures seen while scheduling 005–007 for real:
+- **Merged hashtags:** typing `#tag` straight into Meta Business Suite merged tags twice ("#learnsometh#MicrowaveOven", "#ph#scienceexperiment").
+- **Thumbnail:** no suggested thumbnail showed the hook caption.
+- **Stale clicks:** a window resize moved YouTube's Next and Schedule buttons, so clicks at the old coordinates missed.
+- **Slow listing:** a newly scheduled reel took about 30 s to appear.
+
+Ideas taken from an outside review of the channel: question-style platform titles, a ranking of sources by authority (episode 001 relied on a Wikipedia mirror on IPFS), and a measurement stage.
+
+Each fix was written into the skills, then a fresh agent answered 8 scenarios using only the skills.
+
+**First test:** it found 11 gaps. The most serious:
+- No stage required the review and the human listen before release.
+- "Behind the ___ as the title pattern" contradicted the new question-title rule.
+- Nothing said what to do when a reel is missing from Scheduled.
+- The repair for merged hashtags was underspecified.
+- "Cadence line" and "the publishing folder" were never defined.
+
+All 11 were fixed.
+
+**Second test:** a fresh agent answered 6 scenarios on the fixed text. It found 5 remaining issues:
+- The new review stage could be marked done by sending the owner timestamps, with nobody having listened.
+- "Missing reel" had no action for each outcome.
+- The hashtag repair needed the original tag list.
+- "Matching titles" in the publishing overview.
+- Two wording mismatches.
+
+All 5 were fixed. The review stage now requires the listen before release time; scheduling earlier is allowed, but a problem found then means replacing the upload or unscheduling everywhere.
