@@ -21,7 +21,9 @@ A release is one moment: YouTube, Instagram and the website all go public at the
    - first line: the hook, from the script's Packaging
    - then 2–3 sentences
    - then "Sources and the full explainer: <site>/episodes/<slug>"
-   - then the cadence line from `CHANNEL.md`, and 5–6 hashtags (on YouTube, `#shorts` is one of them)
+   - then the follow line from `CHANNEL.md`: one ask, with a reason and the schedule ("Follow for what's behind the next thing. New episodes Mon · Wed · Fri."; "Subscribe…" on YouTube)
+   - then 5–6 hashtags (on YouTube, `#shorts` is one of them)
+   - Never ask viewers to like, comment a word, tag a friend or share: Instagram says it won't recommend content that "explicitly asks for engagement through shares, comments, tags". A follow request isn't on that list. Keep it in the caption, not spoken in the video, so it can't cost watch-through.
 4. **Schedule YouTube**: see `youtube.md`.
 5. **Schedule Instagram**: see `instagram.md`. The web app can't schedule, so use Meta Business Suite.
 6. **Website**: give the episode page the same release time. See `site-release.md`.

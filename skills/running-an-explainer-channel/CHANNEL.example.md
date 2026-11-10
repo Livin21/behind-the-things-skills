@@ -11,7 +11,7 @@ Read this first, then `DESIGN.md`, then one finished episode (`episodes/<latest>
 | Tool versions | `hyperframes@<x.y.z>` |
 | Brand tag | `<pattern>` at `<position>` |
 | Sign-off line | "<fixed spoken line>"; card: `<lockup text>` |
-| Cadence line | "<release rhythm for captions and descriptions>", e.g. "New episodes Mon · Wed · Fri." |
+| Follow line | One ask with a reason plus the schedule, per platform, e.g. Instagram "Follow for what's behind the next thing. New episodes Mon · Wed · Fri." / YouTube "Subscribe for…". It goes after the website line, before the hashtags. |
 | Folders | `episodes/NNN-slug/` → `script.md`, `sources.md`, `narration.txt`, `video/` |
 | Release slot | `<days> at <time tz>` |
 | Publishing log | `<path>` |

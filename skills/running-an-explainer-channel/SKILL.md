@@ -21,7 +21,7 @@ A channel is a production line: one fact-checked script, one consistent voice, o
 ## Decide once and write down
 Keep two files in the project. Agents read them before anything else.
 - **`DESIGN.md`:** the look, in numbers: palette with roles, two fonts, caption group size, safe zones, motion timings, what not to do. Start from `animating-shorts-in-hyperframes/template/DESIGN.example.md`.
-- **`CHANNEL.md`:** the assets: voice and TTS parameters, measured voice pace, music bed path, fonts, pinned tool versions, brand tag, sign-off line, cadence line, folder naming, release slot, log and metrics paths. Template: `CHANNEL.example.md` in this folder.
+- **`CHANNEL.md`:** the assets: voice and TTS parameters, measured voice pace, music bed path, fonts, pinned tool versions, brand tag, sign-off line, follow line, folder naming, release slot, log and metrics paths. Template: `CHANNEL.example.md` in this folder.
 
 Also decide:
 1. **Format name** ("Behind the ___"): the series and episode name, used on the site, the script heading, the on-screen brand tag and the sign-off. Platform titles are different: the question a viewer would search for (see publishing-shorts).

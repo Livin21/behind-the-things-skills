@@ -36,7 +36,8 @@ Create → Post → upload into the hidden file input.
    - Date: click the date box, cmd+A, type `dd/mm/yyyy` (for example `23/11/2026`), Return.
    - Time: click the hours spinbutton and type `19`, then the minutes spinbutton and type `30`.
    - Zoom in and read back the date and time. The date shows the month as a word ("23 November 2026", "2 December 2026"); if the month is wrong, the field took the date as mm/dd, so retype it that way. The time must read the release slot from `CHANNEL.md` (for example "19:30").
-7. Click the blue **Schedule** button. Confirm under Content → Posts and reels → **Scheduled**. A new reel can take 20–30 s to appear; reload before assuming it failed. If it's still missing after a minute and a reload, check the other tabs before scheduling again (a second attempt can create a duplicate):
+7. Check the caption is final **before** scheduling: Business Suite's "Edit Reel" on an already-scheduled Reel accepts a caption change and keeps the schedule, but saves the old caption (tested on six Reels). To change one later, edit the caption on instagram.com after it goes live, or delete and re-create the scheduled Reel (ask the owner first).
+8. Click the blue **Schedule** button. Confirm under Content → Posts and reels → **Scheduled**. A new reel can take 20–30 s to appear; reload before assuming it failed. If it's still missing after a minute and a reload, check the other tabs before scheduling again (a second attempt can create a duplicate):
    - **In Drafts:** open it, check the caption and cover, and schedule it from there.
    - **In Published:** it went out early. Tell the owner now; don't delete it without their say.
    - **Nowhere:** schedule it once more from the start, then check Scheduled again.
