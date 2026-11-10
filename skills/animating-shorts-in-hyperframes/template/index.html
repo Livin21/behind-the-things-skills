@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>Episode</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+    <style>
+      /* 1. FONTS: always declare local @font-face (missing declarations fail the StaticGuard contract). */
+      @font-face { font-family: "Archivo"; src: url("assets/fonts/Archivo-VF.woff2") format("woff2"); font-weight: 100 900; }
+      @font-face { font-family: "IBM Plex Mono"; src: url("assets/fonts/IBMPlexMono-500.woff2") format("woff2"); font-weight: 500; }
+
+      /* 2. TOKENS: copy from the project's DESIGN.md. */
+      :root {
+        --paper: #eef1ea; --paper-hi: #fafbf7; --shade: #d7ddd0; --ink: #15181b; --ink-2: #56606a;
+        --accent: #ffb000; --flow: #1f6feb;
+        --display: "Archivo", sans-serif; --mono: "IBM Plex Mono", monospace;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--paper); }
+      #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: var(--paper); font-family: var(--display); color: var(--ink); }
+      .clip { position: absolute; inset: 0; width: 100%; height: 100%; }
+      .abs { position: absolute; }
+      svg { display: block; overflow: visible; }
+      .flat { filter: drop-shadow(6px 6px 0 var(--shade)); }
+
+      #bg-grid { position: absolute; inset: -60px; background-image: linear-gradient(rgba(21, 24, 27, 0.06) 2px, transparent 2px), linear-gradient(90deg, rgba(21, 24, 27, 0.06) 2px, transparent 2px); background-size: 40px 40px; }
+      #bg-grain { position: absolute; inset: -60px; background-image: url("assets/grain.png"); background-size: 512px 512px; opacity: 0.05; mix-blend-mode: multiply; }
+      .stage { position: absolute; inset: 0; transform-origin: 50% 42%; }
+
+      /* Callouts: dot + leader + tag. Put a callout INSIDE the wrapper of any object that moves. */
+      .callout { position: absolute; display: flex; align-items: center; }
+      .callout.h { transform: translateY(-50%); }
+      .callout.h.rev { flex-direction: row-reverse; }
+      .callout.v { flex-direction: column; transform: translateX(-50%); }
+      .callout.v.up { flex-direction: column-reverse; }
+      .dot { display: block; width: 14px; height: 14px; border-radius: 50%; background: var(--ink); flex: none; }
+      .lead { display: block; background: var(--ink); flex: none; }
+      .callout.h .lead { height: 4px; } .callout.v .lead { width: 4px; }
+      .tag { display: block; font-family: var(--mono); font-weight: 500; font-size: 32px; letter-spacing: 0.04em; text-transform: uppercase; background: var(--paper-hi); border: 4px solid var(--ink); border-radius: 10px; padding: 8px 16px; white-space: nowrap; line-height: 1.2; }
+
+      /* EXAMPLE SCENE: replace with your scenes. Keep objects inside y 220-1240 at their final pushed-in size. */
+      #s1-thing { left: 290px; top: 520px; width: 500px; height: 500px; }
+
+      /* SIGN-OFF */
+      #so-lock { left: 72px; right: 72px; top: 700px; display: flex; flex-direction: column; align-items: center; }
+      #so-small { font-family: var(--mono); font-weight: 500; font-size: 44px; letter-spacing: 0.24em; }
+      #so-big-wrap { position: relative; margin-top: 4px; }
+      #so-mark { position: absolute; left: -16px; right: -16px; bottom: 26px; height: 64px; background: var(--accent); transform-origin: left center; }
+      #so-big { position: relative; font-weight: 900; font-size: 200px; letter-spacing: -0.05em; line-height: 1; }
+      #so-ep { margin-top: 30px; font-family: var(--mono); font-weight: 500; font-size: 32px; letter-spacing: 0.08em; color: var(--ink-2); }
+
+      /* WIPE: never give #wipe a CSS transform. GSAP's yPercent would ADD to it and leave the panel covering the frame. */
+      #wipe-layer { z-index: 50; pointer-events: none; }
+      #wipe { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; background: var(--shade); border-top: 8px solid var(--ink); border-bottom: 8px solid var(--ink); }
+
+      /* CAPTIONS: they own y 1250-1450 */
+      #captions { z-index: 60; }
+      .cg { position: absolute; left: 110px; right: 110px; top: 1250px; height: 200px; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; }
+      .cg-in { display: block; max-width: 860px; text-align: center; font-weight: 900; font-size: 88px; letter-spacing: -0.02em; text-transform: uppercase; line-height: 1.04; text-wrap: balance; }
+      .cg-in .em { background: var(--accent); padding: 0 0.12em; border-radius: 10px; }
+
+      #chrome { z-index: 70; }
+      #brandtag { position: absolute; left: 72px; top: 138px; display: flex; align-items: center; gap: 14px; font-family: var(--mono); font-weight: 500; font-size: 30px; letter-spacing: 0.08em; color: var(--ink-2); }
+      #brandtag i { display: block; width: 18px; height: 18px; background: var(--ink); }
+    </style>
+  </head>
+  <body>
+    <!-- DUR = narration length + about 1.8 s of sign-off. Every clip below must fit inside it. -->
+    <div id="root" data-composition-id="main" data-start="0" data-duration="12" data-width="1080" data-height="1920">
+      <div id="bg" class="clip" data-start="0" data-duration="12" data-track-index="0"><div id="bg-grid"></div><div id="bg-grain"></div></div>
+
+      <!-- S1 HOOK: the object must be visible by 0.3 s (frame one is the default cover). -->
+      <div id="s1" class="clip scene" data-start="0" data-duration="8" data-track-index="1">
+        <div class="stage" id="s1-stage">
+          <div id="s1-thing" class="abs flat">
+            <svg viewBox="0 0 500 500" width="100%" height="100%"><rect x="6" y="6" width="488" height="488" rx="48" fill="#FAFBF7" stroke="#15181B" stroke-width="8" /><circle id="s1-part" cx="250" cy="250" r="90" fill="#D7DDD0" stroke="#15181B" stroke-width="8" /></svg>
+            <div class="callout v up" id="s1-c1" style="left: 250px; top: -122px"><i class="dot"></i><i class="lead" style="height: 40px"></i><span class="tag">The hidden part</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SIGN-OFF -->
+      <div id="so" class="clip scene" data-start="8" data-duration="4" data-track-index="1">
+        <div class="stage" id="so-stage">
+          <div id="so-lock" class="abs">
+            <div id="so-small">BEHIND THE</div>
+            <div id="so-big-wrap"><i id="so-mark"></i><div id="so-big">THINGS</div></div>
+            <div id="so-ep">EP 000 · THE THING</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="wipe-layer" class="clip" data-start="0" data-duration="12" data-track-index="5"><div id="wipe"></div></div>
+      <div id="captions" class="clip" data-start="0" data-duration="12" data-track-index="6"></div>
+      <div id="chrome" class="clip" data-start="0" data-duration="12" data-track-index="7"><div id="brandtag"><i></i>BEHIND THE THING</div></div>
+
+      <!-- AUDIO: uncomment once assets exist. Set voice data-duration to the exact narration length (ffprobe). -->
+      <!--
+      <audio id="vo" data-start="0" data-duration="10.2" data-track-index="10" src="assets/narration_norm.wav" data-volume="1"></audio>
+      <audio id="music" data-start="0" data-duration="12" data-track-index="11" src="assets/music.mp3" data-volume="1" data-fade-in="0.3" data-fade-out="1.2"
+        data-automation="{&quot;version&quot;:1,&quot;lanes&quot;:[{&quot;target&quot;:&quot;volume&quot;,&quot;points&quot;:[{&quot;t&quot;:0,&quot;v&quot;:0.28},{&quot;t&quot;:10.4,&quot;v&quot;:0.28},{&quot;t&quot;:11.0,&quot;v&quot;:0.5},{&quot;t&quot;:12,&quot;v&quot;:0.5}]}]}"></audio>
+      -->
+    </div>
+
+    <script>
+      /*CAPTIONS:BEGIN*/ var CAPTION_GROUPS = []; /*CAPTIONS:END*/
+
+      window.__timelines = window.__timelines || {};
+      var tl = gsap.timeline({ paused: true });
+      var DUR = 12;
+      var CUTS = [8]; // scene boundaries (seconds), one per transition
+
+      // Push-in, capped at 7% so long scenes don't grow into the caption zone.
+      function push(stage, start, dur) {
+        tl.fromTo(stage, { scale: 1 }, { scale: 1 + Math.min(0.015 * dur, 0.07), duration: dur, ease: "none" }, start);
+      }
+      function callout(id, t) {
+        var el = document.getElementById(id), v = el.classList.contains("v"), rev = el.classList.contains("rev"), up = el.classList.contains("up");
+        var origin = v ? (up ? "50% 100%" : "50% 0%") : rev ? "100% 50%" : "0% 50%";
+        tl.from(el.querySelector(".dot"), { scale: 0, duration: 0.2, ease: "back.out(2.5)" }, t);
+        tl.from(el.querySelector(".lead"), v ? { scaleY: 0, transformOrigin: origin, duration: 0.3, ease: "power2.inOut" } : { scaleX: 0, transformOrigin: origin, duration: 0.3, ease: "power2.inOut" }, t + 0.1);
+        tl.from(el.querySelector(".tag"), Object.assign({ opacity: 0, duration: 0.3, ease: "power2.out" }, v ? { y: up ? -12 : 12 } : { x: rev ? -12 : 12 }), t + 0.36);
+      }
+      function counter(el, from, to, start, dur, fmt, ease) {
+        var o = { v: from }; el.textContent = fmt(from);
+        tl.to(o, { v: to, duration: dur, ease: ease || "none", onUpdate: function () { el.textContent = fmt(o.v); } }, start);
+      }
+
+      tl.to("#bg-grid", { x: -40, y: -40, duration: DUR, ease: "none" }, 0);
+      tl.to("#bg-grain", { x: 30, y: -30, duration: DUR, ease: "none" }, 0);
+
+      // Wipes: the initial state is set with GSAP, never with CSS.
+      gsap.set("#wipe", { yPercent: 102 });
+      CUTS.forEach(function (T, i) {
+        tl.fromTo("#wipe", { yPercent: 102 }, { yPercent: 0, duration: 0.25, ease: "power3.in", immediateRender: i === 0 }, T - 0.25);
+        tl.to("#wipe", { yPercent: -102, duration: 0.3, ease: "power3.out" }, T);
+      });
+
+      // S1 example
+      push("#s1-stage", 0, 8);
+      tl.from("#s1-thing", { y: 60, opacity: 0, duration: 0.45, ease: "power3.out" }, 0.05);
+      callout("s1-c1", 1.2);
+      // SVG elements: give transformOrigin explicitly. GSAP's SVG default is the top-left corner.
+      tl.to("#s1-part", { fill: "#FFB000", scale: 1.1, transformOrigin: "50% 50%", duration: 0.3, ease: "power2.out" }, 2.5);
+
+      // Sign-off (only the final scene may fade out)
+      push("#so-stage", 8, 4);
+      tl.from("#so-small", { y: 22, opacity: 0, duration: 0.35, ease: "power2.out" }, 8.15);
+      tl.from("#so-big", { y: 60, scale: 0.95, opacity: 0, duration: 0.5, ease: "expo.out" }, 8.3);
+      tl.from("#so-mark", { scaleX: 0, duration: 0.4, ease: "expo.out" }, 8.6);
+      tl.from("#so-ep", { opacity: 0, duration: 0.3, ease: "power1.out" }, 8.85);
+      tl.to(["#so-stage", "#brandtag"], { opacity: 0, duration: 0.6, ease: "power2.in" }, DUR - 0.7);
+
+      // Captions (built from CAPTION_GROUPS by build_captions.py)
+      var capRoot = document.getElementById("captions");
+      CAPTION_GROUPS.forEach(function (g, gi) {
+        var el = document.createElement("div"); el.className = "cg"; el.id = "cg-" + gi;
+        var inner = document.createElement("span"); inner.className = "cg-in";
+        g.text.split(" ").forEach(function (w, wi) {
+          if (wi > 0) inner.appendChild(document.createTextNode(" "));
+          var s = document.createElement("span"); s.textContent = w; if (wi === g.em) s.className = "em"; inner.appendChild(s);
+        });
+        el.appendChild(inner); capRoot.appendChild(el);
+        tl.set(el, { visibility: "visible" }, g.start);
+        tl.fromTo(el, { opacity: 0, scale: 0.9, y: 10 }, { opacity: 1, scale: 1, y: 0, duration: 0.12, ease: "back.out(2)", immediateRender: false }, g.start);
+        tl.to(el, { opacity: 0, duration: 0.08, ease: "power2.in" }, g.end - 0.08);
+        tl.set(el, { opacity: 0, visibility: "hidden" }, g.end);
+      });
+      tl.seek(0);
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>
