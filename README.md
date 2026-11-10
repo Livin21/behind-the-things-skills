@@ -31,7 +31,9 @@ Start a new agent session so the skills load. Then ask for something like *"Make
 ## Make it yours
 Your project keeps two files that every episode reads:
 - **`DESIGN.md`:** the look, in numbers. Start from [`DESIGN.example.md`](skills/animating-shorts-in-hyperframes/template/DESIGN.example.md).
-- **`CHANNEL.md`:** voice, music, fonts, tool versions, sign-off line and release slot. Start from [`CHANNEL.example.md`](skills/running-an-explainer-channel/CHANNEL.example.md). The example style ("Graph Paper") is intentionally different from Behind The Things' own look.
+- **`CHANNEL.md`:** voice, music, fonts, tool versions, sign-off line and release slot. Start from [`CHANNEL.example.md`](skills/running-an-explainer-channel/CHANNEL.example.md).
+
+The example style ("Graph Paper") is intentionally different from Behind The Things' own look.
 
 ## How the skills were tested
 See [TESTING.md](TESTING.md). It records each failure observed while making the first episodes without these skills, and the results of producing new episodes with them.

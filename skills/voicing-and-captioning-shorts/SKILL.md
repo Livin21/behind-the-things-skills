@@ -45,7 +45,7 @@ All scripts live in this skill's `scripts/` folder. Call them by absolute path f
   `ffmpeg -ss <t> -t 0.5 -i render.mp4 -af volumedetect -f null -` versus `… -i music.mp3 -af "volume=0.28,volumedetect" …`
 
 ## After the render
-Measure the integrated loudness of the render. If it's outside −13 to −14.5 LUFS, set the voice `data-volume` to `10^((−13.7 − measured)/20)` and render again.
+Measure the integrated loudness of the render. If it's outside −13 to −14.5 LUFS, change **only** the voice `data-volume`, to `10^((−13.7 − measured)/20)` (for −11.8 that's 0.80), and render again. Don't re-normalise the file. If it's off by more than 3 LU, first check that `narration_norm.wav` really came from `normalize_voice.sh`.
 
 ## Common mistakes
 | Mistake | Fix |

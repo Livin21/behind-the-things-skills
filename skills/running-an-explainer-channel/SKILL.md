@@ -13,7 +13,7 @@ A channel is a production line: one fact-checked script, one consistent voice, o
 |---|---|---|---|
 | 1 | Hook and script | scripting-explainer-shorts | The hook is verified; words ≤ 54 × voice pace; every claim and on-screen number has a source row |
 | 2 | Voice and timings | voicing-and-captioning-shorts | Narration normalised; timings repaired; differences flagged for a human; caption spec written |
-| 3 | Animation and render | animating-shorts-in-hyperframes | Check has 0 errors; two looks; render at 1080×1920/30 fps and −13 to −14.5 LUFS; frame 0 shows the object; cover and review sheet exported |
+| 3 | Animation and render | animating-shorts-in-hyperframes | Check has 0 errors; two snapshot looks (step 7); render at 1080×1920/30 fps and −13 to −14.5 LUFS; frame 0 shows the object; cover and review sheet exported |
 | 4 | Release | publishing-shorts | Scheduled on every platform and the site for one release time; logged |
 
 ## Decide once and write down
@@ -31,7 +31,7 @@ Also decide:
 - Give each episode one subagent, which owns stages 1–3 in `episodes/NNN-slug/`.
 - The brief is the topic, the release date, the paths to these skills, and the instruction to read `CHANNEL.md`, `DESIGN.md` and one finished episode. If an agent needs more, put the missing fact in `CHANNEL.md` or the skill, not the brief.
 - **Report:** render path, duration, **render** loudness, hook (draft → final), partly verified claims, and the "listen at" moments.
-- **Folder at the end of stage 3:** `script.md`, `sources.md`, `narration.txt`, `video/{index.html, captions.spec.json, assets/(narration, transcript.json, transcript.raw.json, music, fonts), renders/(epNNN-slug.mp4, frame0.png, cover.jpg, review-sheet.jpg)}`.
+- **Folder at the end of stage 3:** `script.md`, `sources.md`, `narration.txt`, `video/{index.html, captions.spec.json, package.json, hyperframes.json, meta.json, assets/(narration.mp3, narration_norm.wav, transcript.json, transcript.raw.json, music.mp3, fonts/, grain.png), renders/(epNNN-slug.mp4, frame0.png, cover.jpg, review-sheet.jpg)}`.
 - **Review every render yourself.** Read the narration against the sources (spot-check numbers against physics), look at the review sheet and frame 0, and listen to the flagged moments or ask the owner to. "Check passed" is not a review.
 - **Spend:** narration plus at most one regeneration per episode, and only for a clear mispronunciation, an overlong take or a factual fix.
 

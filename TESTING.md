@@ -32,8 +32,12 @@ These came from producing the first four episodes of [Behind The Things](https:/
 
 Each episode is produced by a fresh agent. Its brief contains only the topic, the paths to these skills and the project's DESIGN.md. Every agent writes `SKILL-FEEDBACK.md`, listing each gap, ambiguity or error it found in the skills.
 
-| Episode | Agent result | Gaps reported | Fixed in |
+| Episode | Agent result (with skills v0) | Main gaps reported | Fixed in v1 |
 |---|---|---|---|
-| 005 Microwave | _pending_ | | |
-| 006 Wi-Fi Bars | _pending_ | | |
-| 007 Smoke Detector | _pending_ | | |
+| 005 Microwave | Rendered first time; `check` had 0 errors. The hook held (FDA and USDA). Review found a sourced-but-imprecise number (USDA "4 in" vs 12.2 cm) | Loudness recipe missed its target (4 renders to fix); word budget assumed 2.75 words/s but the voice read 2.46; blank frame 0 in the template; the reveal wasn't covered | `normalize_voice.sh`; budget = 54 × measured pace; hook fully drawn at t = 0; reveal guidance; "source contradicts physics" rule |
+| 006 Wi-Fi Bars | Rendered; `check` had 0 errors. The hook held (Android source, Windows docs) | Loudness; skill vs DESIGN.md conflicts with no precedence rule; timing repair assumed a visible waveform; no pronunciation check | Precedence rule; `fix_timings.py`; `diff_words.py`; render-loudness formula |
+| 007 Smoke Detector | Rendered; `check` had 0 errors. Hook **corrected**: "radioactive metal / speck" → "something radioactive" (it's an oxide, about 0.3 µg) | Loudness; 148 words ran over 58 s; no timing tool (the agent wrote its own); captions followed a stale DESIGN.md rule | Per-voice budget; `fix_timings.py` (generalised from the agent's script); "update DESIGN.md to match the approved pilot" |
+
+All three agents avoided every RED-table animation trap that the v0 skill listed (wipe, fonts, push-in, SVG origin, off-canvas starts, overlaps). New failures they found are now traps 7, 9, 11, 13 and 14 in `traps.md`.
+
+**v1 verification:** a fresh agent answered 15 application questions using only the v1 skills. Covered: loudness maths, the frame-0 rule, token counts, cut placement, unopenable and contradictory sources, precedence, word cap, Instagram scheduling, handles, expected warnings, state changes, folder contents, account creation. All 15 were answered correctly, with file citations. It also reported 8 minor ambiguities (whether to re-normalise or only change `data-volume`, the cut position inside a pause, wording a corrected figure, hyphens in handles, the folder list, "two looks", the version pin, the cover timestamp); all 8 were fixed in v1.1. Episode 005's fix was redone with the v1 tools (`fix_timings.py`, `normalize_voice.sh`).

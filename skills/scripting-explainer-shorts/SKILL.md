@@ -15,7 +15,7 @@ An explainer is only as good as its weakest claim. **Every factual sentence and 
    - **It's provable only for some cases:** keep it general, attribute every specific number to its source ("Android's default…", "Windows…"), and record the gap as partly verified.
 2. **Research the beats.** Open each source rather than trusting a search snippet, and quote the supporting line.
    - **A page won't open:** try another fetcher, then an archived copy. If you use an archive, label it. If nothing loads, hedge the line or cut it.
-   - **The source contradicts itself or physics:** use the figure that is consistent with the physics or a second primary source, and show the working. Example: c ÷ 2450 MHz = 12.2 cm ≈ 5 in, not the USDA's rounded "4 in".
+   - **The source contradicts itself or physics:** speak the correct figure plainly ("about five inches") and show the working in `sources.md`. Note the source's own figure under "Simplified on purpose". Example: c ÷ 2450 MHz = 12.2 cm ≈ 5 in, not the USDA's rounded "4 in".
    - **An inference** (true by reasoning, but no source says it in one line): mark it as an inference in `sources.md`.
 3. **Write the narration** (shape below).
 4. **Fit the budget.** The cap is `54 × (the voice's words per second)`, taken from the project's `CHANNEL.md`; it's about 140 words for a 2.6 words-per-second voice. The spoken sign-off is included. Count with `wc -w`; a hyphenated word counts as one.

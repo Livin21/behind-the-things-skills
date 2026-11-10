@@ -10,12 +10,12 @@ A release is one moment: YouTube, Instagram and the website all go public at the
 
 ## Before the first release (owner does the accounts)
 - **Never create accounts or type passwords.** Give the owner the exact name and handle, and let them sign up or sign in. Then you do the profile, uploads and scheduling.
-- **Handles:** check every platform first. YouTube treats `behind.the.things`, `behind_the_things` and `behindthethings` as the same handle, so add letters (for example `behindthethingshq`) instead of punctuation.
+- **Handles:** check every platform first. YouTube treats `behind.the.things`, `behind_the_things` and `behindthethings` as the same handle, so add **letters only** (for example `behindthethingshq`): no dots, underscores, hyphens or random suffixes. Use the same handle everywhere.
 - Profile details are in `youtube.md` (banner safe area, avatar) and `instagram.md` (Creator account, bio link).
 
 ## Per episode
 1. **Upload copy.** Browser file uploads can be capped at about 10 MB per call. Make a copy from the master render: `bash scripts/encode_upload.sh <master.mp4> <out.mp4>` (2-pass, about 1.2 Mbps; a 55 s short comes to about 9 MB). Keep the master for anything else.
-2. **Cover.** Extract a full-resolution frame at about 2–3 s, where the hook object and its caption are both visible: `ffmpeg -ss 2.3 -i master.mp4 -frames:v 1 -q:v 2 cover.jpg`. Never use frame one.
+2. **Cover.** Use the episode's `renders/cover.jpg`: a frame at about 2–3 s where the hook object and its caption are both visible. If it's missing: `ffmpeg -ss <t> -i master.mp4 -frames:v 1 -q:v 2 cover.jpg`. Never use the platform's default frame.
 3. **Copy.** Write the title, YouTube description and Instagram caption from the script's packaging and its sourced claims only:
    - first line: the hook
    - then 2–3 sentences

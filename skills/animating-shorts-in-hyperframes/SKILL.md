@@ -10,7 +10,7 @@ description: Use when building or fixing a code-drawn vertical (1080x1920) expla
 ## Overview
 Start from `template/`. It has the project files, background, capped push-in, paper wipes, captions, brand tag, sign-off, audio wiring and helpers (`push`, `callout`, `flow`, `swap`, `counter`), each with the known traps fixed.
 
-**Precedence:** the project's `DESIGN.md` and `CHANNEL.md` decide the look and the assets. This skill decides the mechanics and safe zones. If they disagree on a mechanic, follow this skill and report it.
+**Precedence:** the project's `DESIGN.md` and `CHANNEL.md` decide the look (palette, fonts, caption group size and styling, motion feel) and the assets (including the pinned CLI version: update `package.json` to match). This skill decides the mechanics and safe zones (zones, cut placement, frame-0 rule, check and render steps). If they disagree on a mechanic, follow this skill and report it.
 
 ## Process
 1. **Set up.**
@@ -19,7 +19,7 @@ Start from `template/`. It has the project files, background, capped push-in, pa
    - Swap the `@font-face` rules and `assets/fonts/` for the project's fonts.
    - Copy the music bed into `assets/`.
 2. **Plan the timing** from the repaired `assets/transcript.json`.
-   - **Cuts (wipes) sit in pauses:** a cut time `T` is when the wipe fully covers, 0.25 s after it starts. Put `T` in the pause just before the sentence that starts the new picture.
+   - **Cuts (wipes) sit in pauses:** a cut time `T` is when the wipe fully covers. The wipe runs T−0.25 → T+0.3. Put `T` at the **middle** of the pause before the sentence that starts the new picture. If the pause is shorter than 0.55 s or there's none, still centre it there; a little overlap with speech is fine.
    - **Nouns get in-scene reveals:** callouts, the reveal, accent hand-overs.
    - Merge scenes when the picture is continuous (for example the hook and the reveal); holds of up to about 20 s are fine with the push-in cap.
    - Set `DUR` to the last word's end plus 1.8 s; if that passes 58 s, cut the tail to no less than 1.2 s. Each scene's `data-duration` must end exactly where the next `data-start` begins; all scenes go on track 1.
@@ -44,7 +44,7 @@ Start from `template/`. It has the project files, background, capped push-in, pa
    ffprobe -v error -show_entries format=duration:stream=width,height,r_frame_rate -of compact renders/epNNN-slug.mp4
    ffmpeg -i renders/epNNN-slug.mp4 -af loudnorm=print_format=summary -f null - 2>&1 | grep "Input Integrated"   # aim for −13 to −14.5
    ffmpeg -y -i renders/epNNN-slug.mp4 -frames:v 1 renders/frame0.png                                          # must show the object
-   ffmpeg -y -ss 2.6 -i renders/epNNN-slug.mp4 -frames:v 1 -q:v 2 renders/cover.jpg                            # chosen cover
+   ffmpeg -y -ss <t> -i renders/epNNN-slug.mp4 -frames:v 1 -q:v 2 renders/cover.jpg   # chosen cover: t ≈ 2–3 s, where the object and its caption are both fully visible
    N=$(ffprobe -v error -count_packets -select_streams v:0 -show_entries stream=nb_read_packets -of csv=p=0 renders/epNNN-slug.mp4)
    ffmpeg -y -i renders/epNNN-slug.mp4 -vf "select='not(mod(n\,$((N/10))))',scale=270:-1,tile=5x2" -frames:v 1 -vsync 0 renders/review-sheet.jpg
    ```
