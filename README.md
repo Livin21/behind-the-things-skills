@@ -8,7 +8,7 @@ Each skill is a folder with a `SKILL.md`, in the [Agent Skills](https://agentski
 
 | Skill | Use it when |
 |---|---|
-| [`running-an-explainer-channel`](skills/running-an-explainer-channel/SKILL.md) | Starting or running the channel: niche, look, batches, subagents, accounts |
+| [`running-an-explainer-channel`](skills/running-an-explainer-channel/SKILL.md) | Starting or running the channel: niche, look, batches, subagents, review, accounts, measuring what works |
 | [`scripting-explainer-shorts`](skills/scripting-explainer-shorts/SKILL.md) | Writing or fact-checking a 45–60 s script, its hook and its sources |
 | [`voicing-and-captioning-shorts`](skills/voicing-and-captioning-shorts/SKILL.md) | TTS narration, loudness, word timings, speech-synced captions, a music bed |
 | [`animating-shorts-in-hyperframes`](skills/animating-shorts-in-hyperframes/SKILL.md) | Building the 1080×1920 animation in [HyperFrames](https://hyperframes.heygen.com) from a tested template |
