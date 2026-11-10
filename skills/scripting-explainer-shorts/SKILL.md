@@ -1,61 +1,44 @@
 ---
 name: scripting-explainer-shorts
-description: Use when writing or fact-checking the narration for a 45-60 second educational short (YouTube Shorts, Reels, TikTok) about how something works, when choosing or verifying a hook, or when writing captions, descriptions or web copy that state facts about an episode.
+description: Use when writing or fact-checking the narration for a short (under 60 seconds) educational video about how something works, when choosing or verifying a hook, when a source won't open or contradicts itself, or when writing on-screen labels, descriptions or web copy that state facts about an episode.
 ---
 
 # Scripting explainer shorts
 
 ## Overview
-An explainer is only as good as its weakest claim. **Every factual sentence needs a source you actually opened.** A hook that sounds great is usually the least true line in the draft, so verify it first and rewrite it if it fails.
+An explainer is only as good as its weakest claim. **Every factual sentence and every on-screen number needs a source you actually opened.** A hook that sounds great is usually the least true line in the draft, so verify it first and rewrite it if it fails.
 
 ## Process
-1. **Verify the hook before writing anything else.** Find a primary source (a standards body, manufacturer, government agency or university) that states it. If the source says something narrower, the hook becomes the narrower, true version. Examples of draft hooks that failed:
-   - "The stripes aren't the number" → the stripes *are* the number. The true surprise: the price isn't in the barcode.
-   - "Rip off a third and it still scans" → only about 30% of *codewords* at the top level, and most codes are set nearer 15%.
-2. **Research the beats.** Open each source rather than trusting a search snippet. Note the exact supporting line.
+1. **Verify the hook first.** Find a primary source (a standards body, manufacturer, government agency, university or published source code) that states it. Then:
+   - **It fails:** rewrite it to what the source says. "The stripes aren't the number" became "the barcode doesn't know the price"; "a speck of radioactive metal" became "something radioactive" (it's an oxide, too small to see).
+   - **It holds with a nuance:** keep it, adjust words to match the source, and carry the nuance in a beat ("doesn't cook from the inside out" → the waves do heat about an inch in).
+   - **It's provable only for some cases:** keep it general, attribute every specific number to its source ("Android's default…", "Windows…"), and record the gap as partly verified.
+2. **Research the beats.** Open each source rather than trusting a search snippet, and quote the supporting line.
+   - **A page won't open:** try another fetcher, then an archived copy. If you use an archive, label it. If nothing loads, hedge the line or cut it.
+   - **The source contradicts itself or physics:** use the figure that is consistent with the physics or a second primary source, and show the working. Example: c ÷ 2450 MHz = 12.2 cm ≈ 5 in, not the USDA's rounded "4 in".
+   - **An inference** (true by reasoning, but no source says it in one line): mark it as an inference in `sources.md`.
 3. **Write the narration** (shape below).
-4. **Count the words.** The budget is 125–148 words, which at a typical TTS pace of about 2.75 words per second runs 46–54 s, plus a 2 s sign-off.
-5. **Write the scene table and packaging** (template below).
-6. **Write `sources.md`**: one row per claim, plus a "Simplified on purpose" note for each deliberate simplification.
+4. **Fit the budget.** The cap is `54 × (the voice's words per second)`, taken from the project's `CHANNEL.md`; it's about 140 words for a 2.6 words-per-second voice. The spoken sign-off is included. Count with `wc -w`; a hyphenated word counts as one.
+5. **Scene table and packaging** (see the template in `templates.md`).
+6. **Write `sources.md`** with the template: one row per claim, including every number shown on screen in tags or readouts, then "Simplified on purpose" and "Partly verified".
 
 ## Narration shape
-1. **Hook (0–3 s):** a surprising true fact, said over the object. The object is on screen in frame one.
-2. **The reveal:** open the object up and show what's inside.
+1. **Hook (0–3 s):** a surprising true fact, said over the object, which is fully drawn in frame one.
+2. **The reveal:** open the object and show what's inside. If the "thing" is abstract (an icon, a signal), reveal the device that produces it, such as the phone's radio for Wi-Fi bars. Pick the drawn view so the reveal exposes the insides, and make the verb match the motion ("lift the cover").
 3. **Three beats:** what's inside → how it works → what nobody expects.
 4. **Twist line:** the fact people repeat to a friend.
-5. **Sign-off:** one fixed line, the same every episode (for example "Now you know what's behind the ___.").
+5. **Sign-off:** the channel's fixed line.
 
-Write for the ear: short sentences, spell numbers as spoken ("thirteen and a half million"), and avoid tongue-twisters. Add voice notes for words a TTS voice may mispronounce.
+Write for the ear: short sentences, and spell numbers as spoken. Add voice notes for risky words, which become respellings in the TTS prompt.
 
-## script.md template
-```markdown
-# NNN — <Title>
-Format: Short, 1080×1920, ≤ 58 s. Word count: N (≈ N/2.75 s).
-
-## Narration (spoken exactly)
-<one paragraph per beat>
-
-Voice notes: <pronunciations>
-
-## Scenes
-| # | Words | Picture | Accent element |
-|---|---|---|---|
-| 1 Hook | "first words… last words" | <drawable description, named tags like `PRICE: NOT IN HERE`> | <the one highlighted thing> |
-
-## Packaging
-- Title: <curiosity + the object; the video pays it off>
-- Instagram first line: <hook, rephrased>
-- Cover: <a frame that exists in the video: object + its caption at about 2–3 s>
-```
-
-## Rules for every other text
-Descriptions, captions and site pages may only restate claims that are already in `sources.md`. Adding a "small" fact when writing copy is how errors ship.
+## Every other text
+On-screen tags, YouTube descriptions, captions and site pages may only state claims that are already in `sources.md`. Adding a "small" fact while writing copy is how errors ship.
 
 ## Common mistakes
 | Mistake | Fix |
 |---|---|
 | Keeping a catchy hook that's "basically true" | Rewrite it to what the source says |
-| Citing a search snippet | Open the page; quote the line |
-| 170-word scripts | Cut to 148 or fewer; the voice won't speed up |
-| A cover line that never appears on screen | Captions are the spoken words; plan the cover from a real frame |
-| Unflagged simplifications | List them under "Simplified on purpose" |
+| Repeating a source's rounding error | Check against physics or a second source; show the working |
+| Tags with unsourced numbers | Add a source row for every on-screen figure |
+| 148 words for a slow voice | Use the voice's measured pace; cap at 54 × pace |
+| Silently dropping an unopenable source | Hedge or cut the line; record it as partly verified |

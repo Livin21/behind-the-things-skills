@@ -14,7 +14,7 @@ A technical diagram on cool graph paper. Everyday objects are drawn as flat 2D i
 - `--accent`: `#FFB000`: **the hidden part.** Fills and marker highlights only; ink text sits on it. Never use it for text on paper.
 - `--flow`: `#1F6FEB`: energy and data paths, dashed lines
 
-Use one accent element group per frame.
+Use one accent element group per frame. The caption marker is exempt, and the accent may hand over to a new subject mid-scene.
 
 ## Type
 - Statements and captions: `Archivo`, weight 900, tracking −0.03em.
@@ -23,8 +23,8 @@ Use one accent element group per frame.
 
 ## Layout (1080×1920)
 - Text inside x 72–940, y 220–1500. Platform UI covers the bottom ~420 px and the right ~140 px.
-- Captions: y 1250–1450, centred, up to 2 lines. Nothing else goes there, even after the push-in.
-- Object stage: y 220–1240. The brand tag sits top-left at y 138.
+- Captions: y 1250–1450, centred, up to 2 lines, **2–7 words per group** at phrase boundaries, 88 px, one emphasis word per group. Nothing else goes there, even after the push-in.
+- Object stage: y 220–1240 at the full push (x 104–912, y 258–1211 before the push). The brand tag sits top-left at y 138.
 
 ## Motion (numbers)
 - Push-in: 1.5% per second, capped at 7% total, ease `none`.
@@ -32,10 +32,10 @@ Use one accent element group per frame.
 - Callouts: dot 0.2 s, leader 0.3 s, tag 0.3 s.
 - The reveal (casing lifts): 0.9 s, `power4.inOut`.
 - Transitions: a paper wipe at every cut (0.25 s in, 0.3 s out). No crossfades or glitches.
-- The hook object is visible by 0.3 s. Frame one is the platforms' default cover.
+- The hook object is **fully drawn at t = 0** (settle with scale or y, never opacity). Frame one is the platforms' default cover.
 
 ## Sound
-- Narration at −14 LUFS; music bed at about −28 LUFS under the voice.
+- The render lands at −13 to −14.5 LUFS. Normalise mono narration to −16.5 (it gains about 3 LU in stereo). Music bed at about −28 LUFS under the voice.
 
 ## What not to do
 - No gradients, glow, neon or blurred shadows. Use only hard offset shadows (6 px, `--shade`).

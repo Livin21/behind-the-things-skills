@@ -1,0 +1,9 @@
+{
+  "name": "episode",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "npx --yes hyperframes@0.9.28 check",
+    "render": "npx --yes hyperframes@0.9.28 render --quality high --fps 30"
+  }
+}

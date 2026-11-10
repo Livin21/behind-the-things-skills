@@ -1,6 +1,6 @@
 """Inject caption groups into a HyperFrames index.html.
 
-Usage: python3 -I build_captions.py <transcript.json> <captions.spec.json> <index.html>
+Usage: python3 -I /abs/path/to/build_captions.py <transcript.json> <captions.spec.json> <index.html>
 
 spec: list of [word_count, display_text, emphasis_word_index_or_-1]
 Word counts must sum to the transcript length. Times come from the transcript, so a
@@ -14,7 +14,13 @@ html_path = sys.argv[3]
 
 total = sum(s[0] for s in spec)
 if total != len(words):
-    sys.exit(f"spec covers {total} words, transcript has {len(words)}")
+    sys.exit(f"spec covers {total} words, transcript has {len(words)} (count transcript tokens, not script words)")
+for a, b in zip(words, words[1:]):
+    if b["start"] < a["start"]:
+        sys.exit(f"transcript not monotonic at {a['text']!r} -> {b['text']!r}; fix timings first (fix_timings.py)")
+for count, text, em in spec:
+    if em >= len(text.split(" ")):
+        sys.exit(f"emphasis index {em} out of range for {text!r} (index counts words of the display text)")
 
 groups, i = [], 0
 for count, text, em in spec:
