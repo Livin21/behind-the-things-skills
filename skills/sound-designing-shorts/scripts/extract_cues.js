@@ -83,5 +83,15 @@
     if (!last || c.t - last.t >= 0.07) out.push(c);
     else if (c.hand && !last.hand) out[out.length - 1] = c;
   });
-  return out.map(({ t, s, g }) => ({ t, s, g }));
+  // Burst cap: at most 6 automatic cues in any 1 s window. Counter ticks, hand cues and the
+  // structural sounds (wipe, reveal, lockup) are exempt and always kept.
+  const exempt = (c) => c.hand || c.s.startsWith("digit") || c.s === "wipe" || c.s === "reveal" || c.s === "lockup";
+  const kept = [], recent = [];
+  for (const c of out) {
+    if (exempt(c)) { kept.push(c); continue; }
+    while (recent.length && c.t - recent[0] >= 1.0) recent.shift();
+    if (recent.length >= 6) continue;
+    recent.push(c.t); kept.push(c);
+  }
+  return kept.map(({ t, s, g }) => ({ t, s, g }));
 }

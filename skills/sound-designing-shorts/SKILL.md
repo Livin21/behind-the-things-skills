@@ -55,6 +55,7 @@ Rules are checked in this order, first match wins. An id "word" means the id spl
 - **Staggers:** each target sounds at its own start, at most 10 cues a second and 6 per tween.
 - **Never sonified:** captions (`.cg`), anything inside `[data-sfx="off"]`, and tweens with `data: "nosfx"`.
 - **Spacing:** no cue in the first 0.15 s, and none within 70 ms of another.
+- **Burst cap:** at most 6 automatic cues in any 1 s window. Counter ticks, hand cues, wipes, the reveal and the end-card chord are exempt.
 
 ## Hand-placed cues
 The extractor can't know which moment is the twist. In `index.html`, next to `tl`:
