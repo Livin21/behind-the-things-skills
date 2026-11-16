@@ -40,7 +40,7 @@ Prefer element refs from `find` over screen coordinates. If you do use coordinat
    - Thumbnail: upload straight into the hidden `input[type=file]` in the Thumbnail section (no patch needed).
    - Audience "not made for kids", Show more → paid promotion No, AI use No (per the listed cases), category Education.
    - **Video language: English.** Without it, the Subtitles "Add" button stays disabled.
-3. **Video elements → Subtitles → Add → Upload file → With timing → Continue:** patch `HTMLInputElement.prototype.click` first (as in `instagram.md`), upload the `.srt` into the file input, then **Done**. Studio confirms "English subtitles published".
+3. **Video elements → Subtitles → Add → Upload file → With timing → Continue** (if this step gets missed, add the SRT later from the video's Languages page: "Upload manual" → With timing saves only a **draft**, so open "Edit subtitles" and click **Publish**; verified on L03, 16 Nov): patch `HTMLInputElement.prototype.click` first (as in `instagram.md`), upload the `.srt` into the file input, then **Done**. Studio confirms "English subtitles published".
 4. **Visibility → Schedule:**
    - Pick the day in the date picker.
    - Click the time **input** by its `find` ref (coordinates missed it once and selected the page), cmd+A, type `19:30`, Return.
