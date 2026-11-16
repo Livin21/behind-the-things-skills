@@ -8,7 +8,7 @@
 | 4 | An SVG part scales or rotates from its corner | GSAP's default origin for SVG is the top-left | `transformOrigin: "50% 50%"` in the tween |
 | 5 | Items peek in at the frame edge before they should | The `from` offset is too small | The start state must be fully off canvas; snapshot each scene's first frame |
 | 6 | Labels wrap inside fixed-width boxes | Box narrower than the label | `white-space: nowrap`; size the box to the longest label |
-| 7 | A tag beside a centred object runs past x 940 | 32 px mono ≈ 19 px per character, plus 40 px padding | Measure; put the tag above or below, or run the leader down to it |
+| 7 | A tag beside a centred object runs past x 940 | 32 px Azeret Mono with tracking ≈ 22.4 px per character, plus 40–48 px padding (measured on L02, L04 and 018, 16 Nov) | Measure; put the tag above or below, or run the leader down to it |
 | 8 | A moving dot or packet covers labels | A shared lane | Give the mover its own lane beside the labels |
 | 9 | Blank default cover on the platforms | The hook object fades in | No opacity entrance on the hook; check `frame0.png` from the render. A t = 0.3 snapshot won't catch it |
 | 10 | `content_overlap` on a stamp over text, or on stacked swap tags | An intentional overlap | `data-layout-allow-overlap` on both elements |

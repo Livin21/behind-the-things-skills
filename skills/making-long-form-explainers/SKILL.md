@@ -52,19 +52,20 @@ Run in `video/`; raw takes are `assets/vo/chNN.mp3`.
 - A 150 s track can't cover 7 minutes in three sections; reuse the opening track's unused tail under the recap. Use `end_trim` to align on the track's **audible** ending; generated tracks end with 1–2 s of silence.
 
 ## Captions
-No burned-in captions at 16:9. `python3 -I build_srt.py chapters.json ../<id>.en.srt` aligns each `narration/chNN.txt` with its word timings (the script's wording wins). `caption_display` in `chapters.json` maps spoken phrases to display forms: numbers to digits (list "three hundred thousand" before "three hundred"), and any TTS respelling back to the real spelling. Lines are 42 characters at most, two per cue, and avoid ending on a small word.
+No burned-in captions at 16:9. `build_srt.py` fills cues greedily and can leave one-word cues ("waves.", "11."); L02 balanced them with an episode-local `video/build_srt_balanced.py`, worth folding into the template. `python3 -I build_srt.py chapters.json ../<id>.en.srt` aligns each `narration/chNN.txt` with its word timings (the script's wording wins). `caption_display` in `chapters.json` maps spoken phrases to display forms: numbers to digits (list "three hundred thousand" before "three hundred"), and any TTS respelling back to the real spelling. Lines are 42 characters at most, two per cue, and avoid ending on a small word.
 
 ## Fan-out rules
 - Lock `lib/` (tokens, helpers, drawings) and one approved chapter **before** briefing agents. Agents write only `compositions/chNN.html`.
 - Give each agent: duration, vo_at, its beat table, and how its first and last frames meet the neighbours (wipe, or an exact match-cut drawing call).
 - Agents render with `--workers 2` (six render at once) and don't run the project-wide `check`; the lead does.
-- Expect 15–20 minutes per chapter agent, with two or more render-and-review rounds.
+- Expect 15–35 minutes per chapter agent, with two or three render-and-review rounds. HyperFrames renders one job at a time per account, so chapters (and any Shorts in production) queue. A one-frame thumbnail render once hung for 29 minutes under that load; stop and rerun it.
+- **Chapter agents report to the orchestrator, not to the lead.** A lead that waits for their reports never hears them, so it should watch the files (each chapter's final sheet and the `compositions/chNN.html` timestamps).
 
 ## Integration review (stage 7)
 1. `npx hyperframes@<pin> check`: 0 errors. Warnings to read: `gsap_*` ones are real; `line_unread` means hold the tag longer; `dead_stretch` is often false (confirm with frames).
 2. Full render: `npx hyperframes@<pin> render --quality standard -o renders/<id>.mp4` for review; the upload master uses `--quality high`.
 3. A boundary sheet: frames at ±0.3 s around every chapter start, plus frame 0 and the last frame (ffmpeg `tile`). Match cuts must line up and indicators must read right.
-4. Audio: integrated loudness −13 to −14.5 LUFS (`ebur128`); `silencedetect=noise=-38dB:d=0.9` over the whole file should find only the deliberate pauses. Silence at the end means the last music section ends on its silent tail (set `end_trim`, measured with `silencedetect` on the track).
+4. Audio: integrated loudness −13 to −14.5 LUFS (`ebur128`); `silencedetect=noise=-38dB:d=0.9` over the whole file should find only the deliberate pauses. Silence at the end means the last music section ends on its silent tail (set `end_trim`, measured with `silencedetect` on the track). The root's 1.2 s music fade-out always leaves about 1.6 s of near-silence at the very end (L01 and L02 both); that one is expected.
 5. The lead watches the whole render once at normal speed, and a human hears the hook, every chapter boundary and every flagged word before release.
 
 ## Traps (all hit on L01)
@@ -76,6 +77,7 @@ No burned-in captions at 16:9. `python3 -I build_srt.py chapters.json ../<id>.en
 | A `fromTo` that reveals a hidden element but leaves opacity out of the destination is invisible in multi-worker renders (`check` error) | Put `opacity: 1` in the destination too |
 | `K.draw` (stroke-dashoffset) turns dashed lines solid | Fade dashed lines in, or use `K.flow` |
 | The mono font lacks `≈`, `−` or `→` | It falls back to a system glyph; check the frames, or use ASCII |
+| `check` "gsap_timeline_set_initial_hide" even with `gsap.set` plus `tl.set` at 0 | A false warning when the pattern is followed; confirm on the first frame |
 | `check` "dead_stretch" warnings on long sub-compositions | Usually false; confirm against frames from the full render |
 | `fix_timings.py` (before v4) could make a word end before it starts | Fixed: v4 skips the move and fails on inverted words |
 
