@@ -19,7 +19,7 @@
    - AI use: the question asks whether AI was used in four listed ways: a real person appearing to say or do something, altered footage of a real event or place, a realistic scene that didn't occur, or music as the main focus. A synthetic narrator over a drawn animation, with a quiet bed, matches none of them, so the answer is "No, AI wasn't used".
 5. Click **Next** three times (use `find` for the Next button rather than fixed coordinates, which move when the window is resized) (Video elements → Checks → Visibility). Checks should read "No issues found".
 6. **Visibility → Schedule:**
-   - Date picker: click the day.
+   - Date: open the date dropdown, then type the date into the picker's own text field (for example `23 Nov 2026`) and press Return. Clicking a calendar cell by coordinates breaks when the window size changes.
    - Time: typing into the time field doesn't stick (16 Nov). Click the time input by its `find` ref, then `find` the option ("07:30", "19:30") in the list that opens, scroll to it and click it. Zoom in and read back the date and time.
    - Time zone: keep local.
 7. Click **Schedule**. Copy the link from the "Video scheduled" dialog (`youtube.com/shorts/<id>`) and log it.

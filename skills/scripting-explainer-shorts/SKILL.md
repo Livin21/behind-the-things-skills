@@ -53,3 +53,9 @@ On-screen tags, YouTube descriptions, captions and site pages may only state cla
 | 148 words for a slow voice | Use the voice's measured pace; cap at 54 × pace |
 | Silently dropping an unopenable source | Hedge or cut the line; record it as partly verified |
 | Citing a vendor blog or a Wikipedia mirror | Go up the table: the spec, the regulator, the maker |
+
+## Reading awkward sources (16 Nov)
+- **PDFs:** WebFetch returns binary. Download the file and extract the text with PyMuPDF. Scans with no text layer need another copy; for US patents, Google Patents has the text.
+- **USDA FSIS pages** keep answers in collapsed panels, so a markdown fetch returns only the questions. Read the HTML.
+- **eCFR** blocks page fetches; its versioner API works with `curl --compressed`, and govinfo.gov has the annual edition.
+- **A blocked live page:** read an Internet Archive copy, cite it as such with its capture date, and prefer a second live source that agrees.

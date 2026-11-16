@@ -76,6 +76,7 @@ No burned-in captions at 16:9. `build_srt.py` fills cues greedily and can leave 
 | Hidden layers set with `tl.set(..., 0)` show on a chapter's first frame | Also `gsap.set(...)` immediately (this is where a match cut breaks) |
 | A `fromTo` that reveals a hidden element but leaves opacity out of the destination is invisible in multi-worker renders (`check` error) | Put `opacity: 1` in the destination too |
 | `K.draw` (stroke-dashoffset) turns dashed lines solid | Fade dashed lines in, or use `K.flow` |
+| An SVG element lands about 100 px off after a rotation or scale | `svgOrigin` given in both a `gsap.set` and a later tween on the same element (L04 chapters 1 and 7). Use one `fromTo` that carries `svgOrigin` once |
 | The mono font lacks `≈`, `−` or `→` | It falls back to a system glyph; check the frames, or use ASCII |
 | `check` "gsap_timeline_set_initial_hide" even with `gsap.set` plus `tl.set` at 0 | A false warning when the pattern is followed; confirm on the first frame |
 | `check` "dead_stretch" warnings on long sub-compositions | Usually false; confirm against frames from the full render |
