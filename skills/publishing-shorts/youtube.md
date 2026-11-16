@@ -46,4 +46,8 @@ Prefer element refs from `find` over screen coordinates. If you do use coordinat
    - Click the time **input** by its `find` ref (coordinates missed it once and selected the page), cmd+A, type `19:30`, Return.
    - Don't click the Schedule heading afterwards: it collapses the section. Read back the date and time, then click **Schedule**.
    - The confirmation says "Your video will be set to public on <date> at <time>"; log the ID.
+5. **After scheduling** (each long-form; verified 16 Nov):
+   - **End screen:** video page → End screen → template "1 video, 1 subscribe". Leave the video as "Best for viewer" (or a specific related long-form once public). Set both elements to start when the end card appears; they must stay at least 5 s, so with a 5 s end card start about 5.3 s before the end. Dragging the tiles in the preview doesn't work; type the start times.
+   - **Thumbnail A/B test:** thumbnail ⋮ → A/B testing → "Thumbnail only", with thumbnails 2 and 3 from the episode's `-thumbnail-b.jpg` (no text) and `-thumbnail-c.jpg` (a different hook). The dialog's file inputs aren't reachable by `find`; set them by script from the local server (as for the master), then Set test → Save. **A test can't run while the video is private**: the next Monday session checks it started after release and restarts it if not.
+   - **Playlist:** add to "How Everyday Things Work: The Long Explainers" (Playlists → Select → tick → Done → Save).
 
