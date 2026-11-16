@@ -14,7 +14,7 @@ A release is one moment: YouTube, Instagram and the website all go public at the
 - Profile details are in `youtube.md` (banner safe area, avatar) and `instagram.md` (Creator account, bio link).
 
 ## Per episode
-1. **Upload copy.** Browser file uploads can be capped at about 10 MB per call. Make a copy from the sound master (`renders/epNNN-slug-sound.mp4`, from sound-designing-shorts; never the raw render): `bash scripts/encode_upload.sh <master.mp4> <out.mp4>` (2-pass, about 1.2 Mbps; a 55 s short comes to about 9 MB). Keep the master for anything else.
+1. **Upload copy.** Browser file uploads can be capped at about 10 MB per call. Make a copy from the sound master (`renders/epNNN-slug-sound.mp4`, from sound-designing-shorts; never the raw render): `bash scripts/encode_upload.sh <master.mp4> <out.mp4> 1180 <cover.jpg>`. The cover argument bakes the cover in as frame 0 (1/30 s, imperceptible), so YouTube's auto thumbnails and share previews on X, Slack and Discord show it (2-pass, about 1.2 Mbps; a 55 s short comes to about 9 MB). Keep the master for anything else.
 2. **Cover.** Use the episode's `renders/cover.jpg`: a frame at about 2–3 s where the hook object and its caption are both visible. If it's missing: `ffmpeg -ss <t> -i master.mp4 -frames:v 1 -q:v 2 cover.jpg`. Never use the platform's default frame.
 3. **Copy.** Write the title, YouTube description and Instagram caption from the script's packaging and its sourced claims only:
    - title: the question a viewer would type into search, which the video answers ("Do Wi-Fi Bars Measure Your Internet Speed?"), not a statement of the twist

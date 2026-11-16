@@ -50,6 +50,9 @@ Start from `template/`. It has the project files, background, capped push-in, pa
    ```
    Look at `frame0.png`, `cover.jpg` and `review-sheet.jpg`. If the loudness is off, see voicing-and-captioning-shorts → After the render.
 
+## Reading floors
+Keep the pace with fast motion, not by pulling text early. Hold every tag fully visible and settled for at least 0.8 s, and a sentence for 0.3 s per word (1.2 s minimum). Sequential text (a list of tags) reveals no faster than about 0.8 s apart; quicker reveals are fine for dots, ticks and marks, which carry no reading. (From brag's reading-time rules; `check`'s `line_unread` warnings cover speech-synced captions, not tags.)
+
 ## Traps
 See `traps.md`: 16 symptoms that have happened, with their cause and fix. Scan it before the first look.
 

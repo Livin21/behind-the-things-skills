@@ -76,7 +76,7 @@ sfx(31.2, "switch", 0.9);        // a readout swap (STEADY → DROPPED)
 ## Mix (fixed; change it only with the owner)
 - **Voice:** high-pass at 80 Hz, +4.5 dB at 4.5 kHz, +2.5 dB shelf above 9 kHz, de-esser, 2.5:1 compression. Its `data-volume` is applied.
 - **Effects:** −12 dB (`--sfx-db`), with a ±1 dB deterministic jitter.
-- **Music:** the `<audio id="music">` lane as written.
+- **Music:** the `<audio id="music">` lane as written, shifted by up to one bar (2.4 s) so the bed's strongest nearby onset lands on the `reveal` cue (`--no-align` turns it off). Across 008–019 this lifted the music accent under the twist from 0.15–0.62 to 0.85 or more. The idea comes from brag's "lock major reveals to strong music cues within ±0.15 s".
 - **Master:** −14 LUFS integrated, limiter at −1 dBTP.
 
 To change the character, edit `make_kit.py` or `remix.py` for every episode at once, and get the owner to hear a before-and-after. Never tweak the mix for one episode.
