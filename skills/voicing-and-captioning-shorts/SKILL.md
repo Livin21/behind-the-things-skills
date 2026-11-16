@@ -25,7 +25,8 @@ All scripts live in this skill's `scripts/` folder. Call them by absolute path f
 4. **Repair the timings.** Run `python3 -I fix_timings.py assets/narration.mp3 assets/transcript.json`.
    - It fixes only the words around measured pauses: late onsets, sentence-final words pushed into a pause, and ends spanning a pause. It keeps `transcript.raw.json` and refreshes that copy if the audio changes. Re-runs are idempotent. It fails on out-of-order or overlapping words.
    - **Read its printout.** A breath right after a pause can pull an onset too early. If a changed onset isn't followed by speech (spot-check with a 0.5 s `volumedetect` window), put the raw value back by hand. Do hand repairs after the last run.
-   - It can't fix drift in the middle of a long sentence. If a cut or emphasised caption lands mid-sentence and looks late, transcribe that sentence alone in a scratch folder (cut it with ffmpeg at its pauses), add the cut's start time, and copy those onsets in.
+   - It can leave **sentence-final words sitting inside the next pause** (seen on four episodes, 16 Nov). Find them with `ffmpeg -i assets/narration_norm.wav -af silencedetect=noise=-32dB:d=0.06 -f null -`, and pull each such word's end back to the silence start.
+   - It can't fix drift in the middle of a long sentence. If a cut or emphasised caption lands mid-sentence and looks late, transcribe that sentence alone in a scratch folder (cut it with ffmpeg at its pauses), add the cut's start time, and copy those onsets in. Pin the first word of each cut piece to the cut point: Whisper often gives a piece's first two words the same start.
 5. **Flag pronunciation.** Transcribe again with `--model medium.en` in a scratch folder, then run
    `python3 -I diff_words.py narration.txt assets/transcript.json <scratch>/transcript.json`.
    Number-form differences ("55" vs "fifty-five") are fine. Put every other difference in your report as "listen at mm:ss". **A human listens to the hook and the flagged moments before release.**
@@ -42,7 +43,7 @@ All scripts live in this skill's `scripts/` folder. Call them by absolute path f
 ## Music bed
 - Copy the channel's bed into `assets/`. It must be at least as long as the video; if it's shorter, generate a longer one rather than cutting the fade.
 - Set a volume lane at **0.28** under the voice (about −28 LUFS), rising to **0.5** about 0.2 s after the last word, and `data-fade-out="1.2"`.
-- **Check:** compare a 0.5 s window inside a pause in the render with the bed alone at 0.28. They should match within 0.5 dB.
+- **Check:** compare a 0.5 s window in the **middle** of a pause (its start still carries the voice's tail) in the render with the bed alone at 0.28. They should match within 0.5 dB.
   `ffmpeg -ss <t> -t 0.5 -i render.mp4 -af volumedetect -f null -` versus `… -i music.mp3 -af "volume=0.28,volumedetect" …`
 
 ## After the render

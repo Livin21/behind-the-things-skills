@@ -14,7 +14,7 @@ A channel is a production line: one fact-checked script, one consistent voice, o
 | 1 | Hook and script | scripting-explainer-shorts | The hook is verified; words ≤ 54 × voice pace; every claim and on-screen number has a source row |
 | 2 | Voice and timings | voicing-and-captioning-shorts | Narration normalised; timings repaired; differences flagged for a human; caption spec written |
 | 3 | Animation and render | animating-shorts-in-hyperframes | Check has 0 errors; two snapshot looks (step 7); render at 1080×1920/30 fps and −13 to −14.5 LUFS; frame 0 shows the object; cover and review sheet exported |
-| 3¼ | Sound pass | sound-designing-shorts | `renders/epNNN-slug-sound.mp4` mastered at −13.8 to −14.5 LUFS with 1.0–1.6 effects per second; the twist has a hand-placed `reveal` cue |
+| 3¼ | Sound pass | sound-designing-shorts | `renders/epNNN-slug-sound.mp4` mastered at −13.8 to −14.5 LUFS with 1.0–2.0 effects per second without counter ticks; the twist has a hand-placed `reveal` cue |
 | 3½ | Review | this skill (Producing a batch) | You have read the narration against `sources.md`, opened frame 0 and the review sheet; a human has heard the hook and every "listen at" moment before the release time |
 | 4 | Release | publishing-shorts | Scheduled on every platform the channel uses (publishing-shorts covers YouTube Shorts and Instagram Reels) and on the site, all for one release time; logged |
 | 5 | Measure | this skill (below) | 48 h and 7-day numbers logged for the episode |

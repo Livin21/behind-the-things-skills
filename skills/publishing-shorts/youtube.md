@@ -16,13 +16,18 @@
 3. **Audience:** "No, it's not made for kids".
 4. **Show more:**
    - Paid promotion: No.
-   - AI use: answer against the listed cases. A synthetic narrator over a drawn animation matches none of them, so the answer is "No".
+   - AI use: the question asks whether AI was used in four listed ways: a real person appearing to say or do something, altered footage of a real event or place, a realistic scene that didn't occur, or music as the main focus. A synthetic narrator over a drawn animation, with a quiet bed, matches none of them, so the answer is "No, AI wasn't used".
 5. Click **Next** three times (use `find` for the Next button rather than fixed coordinates, which move when the window is resized) (Video elements → Checks → Visibility). Checks should read "No issues found".
 6. **Visibility → Schedule:**
    - Date picker: click the day.
-   - Time: cmd+A in the time field, type `19:30`, press Return.
+   - Time: typing into the time field doesn't stick (16 Nov). Click the time input by its `find` ref, then `find` the option ("07:30", "19:30") in the list that opens, scroll to it and click it. Zoom in and read back the date and time.
    - Time zone: keep local.
 7. Click **Schedule**. Copy the link from the "Video scheduled" dialog (`youtube.com/shorts/<id>`) and log it.
+
+## Rescheduling and editing after upload
+- **Move a scheduled video:** open its edit page → Visibility → the date picker and the time option list as above → Done → Save.
+- **Save takes a few seconds.** Wait for the "Changes saved" toast before navigating away; navigating during a save is blocked by a "Leave site?" dialog.
+- **Description text** can be changed in place with `javascript_tool`: replace the text node inside the description's `#textbox[contenteditable="true"]`, dispatch an `input` event, then Save.
 
 ## Clicking reliably
 Prefer element refs from `find` over screen coordinates. If you do use coordinates, take a fresh screenshot after any window resize or scroll and measure again: a click at a stale position lands on the wrong control or on nothing. After a missed click, take a screenshot, read which step the dialog's stepper is on, and check the Audience and Visibility choices before you continue.

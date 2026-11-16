@@ -28,8 +28,9 @@ bash <skills>/sound-designing-shorts/scripts/sound_pass.sh . renders/epNNN-slug.
 
 ## Check
 - **Density:** 1.0–2.0 cues per second **without counter ticks**, which the printout reports separately. Episodes 002–007 measured 1.07–1.86.
-- **Loudness:** −13.8 to −14.5 LUFS integrated, measured on the output, and true peak at −1 dBTP or lower: `ffmpeg -i <out> -af ebur128=peak=true -f null -`. This measurement is the authority; the printout's figure can differ by 0.1.
+- **Loudness:** −13.8 to −14.5 LUFS integrated, measured on the output, and true peak at −1 dBTP or lower: `ffmpeg -i <out> -af ebur128=peak=true -f null -`. This measurement is the authority; the printout's figure can differ by 0.1. ebur128 logs every frame, so grep its "Summary" block.
 - **Bursts above 6 per second** are fine for counters (10 ticks a second) and staggers (at most 10 a second, 6 per tween).
+- **Too sparse (under 1.0):** the extractor can't hear SVG attribute tweens (a circle's `r`, stroke width), colour changes, position moves without a fade, or `repeat` pulses. Add hand `sfx()` cues on those visible changes, typically `tick`, `tick-lo` or a stepping blip. A repeating pulse goes under `data-sfx="off"` with its beats placed by hand.
 - **Too dense, or a burst under narration that isn't a counter or a stagger:** find the stretch in `sfx-cues.json`. Silence its element with `data-sfx="off"` (or a plain-object tween with `data: "nosfx"`) and run the pass again. Don't lower `--sfx-db`.
 - **Listen:** a human hears the whole `-sound.mp4` on headphones; effects should sit under the voice and never cover a word. An agent can't listen, so it reports "sound listen pending" with the three busiest moments (mm:ss) for the owner's next review.
 

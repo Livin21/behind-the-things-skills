@@ -54,6 +54,7 @@
       #so-mark { position: absolute; left: -16px; right: -16px; bottom: 26px; height: 64px; background: var(--accent); transform-origin: left center; }
       #so-big { position: relative; font-weight: 900; font-size: 200px; letter-spacing: -0.05em; line-height: 1; }
       #so-ep { margin-top: 30px; font-family: var(--mono); font-weight: 500; font-size: 32px; letter-spacing: 0.08em; color: var(--ink-2); }
+      #so-new { margin-top: 14px; font-family: var(--mono); font-weight: 500; font-size: 32px; letter-spacing: 0.08em; color: var(--ink-2); }
 
       /* WIPE: never give #wipe a CSS transform. GSAP's yPercent would ADD to it and leave the panel covering the frame. */
       #wipe-layer { z-index: 50; pointer-events: none; }
@@ -92,6 +93,7 @@
             <div id="so-small">BEHIND THE</div>
             <div id="so-big-wrap"><i id="so-mark"></i><div id="so-big">THINGS</div></div>
             <div id="so-ep">EP 000 · THE THING</div>
+            <div id="so-new">NEW EPISODES EVERY DAY</div>
           </div>
         </div>
       </div>
@@ -172,6 +174,7 @@
       tl.from("#so-big", { y: 60, scale: 0.95, opacity: 0, duration: 0.5, ease: "expo.out" }, 8.3);
       tl.from("#so-mark", { scaleX: 0, duration: 0.4, ease: "expo.out" }, 8.6);
       tl.from("#so-ep", { opacity: 0, duration: 0.3, ease: "power1.out" }, 8.85);
+      tl.from("#so-new", { opacity: 0, duration: 0.3, ease: "power1.out" }, 9.1); // 1.1 s after the sign-off scene starts (DESIGN "End card"); the line is the channel's cadence
       tl.to(["#so-stage", "#brandtag"], { opacity: 0, duration: 0.6, ease: "power2.in" }, DUR - 0.7);
 
       // Captions (built from CAPTION_GROUPS by build_captions.py)
