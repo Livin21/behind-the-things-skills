@@ -1,4 +1,4 @@
-"""Repair Whisper word timings around the audio's real pauses (targeted, not global).
+"""Repair Whisper word timings around the audio's real pauses (targeted, not global). v5: abbreviations such as "U.S." are not sentence ends.
 
 Whisper is accurate for most words; it drifts at pauses:
   (a) the first word after a pause starts late,
@@ -19,6 +19,12 @@ Transcript format: [{"text": str, "start": float, "end": float, ...}] (npx hyper
 import hashlib, json, os, re, subprocess, sys
 
 ENDS_SENTENCE = re.compile(r"[.?!]['\")]*$")
+# Dotted abbreviations ("U.S.", "a.m.") and titles ("Dr.", "St.") end in a period without ending a sentence.
+ABBREV = re.compile(r"^(?:[A-Za-z]\.){2,}['\")]*$|^(?:Mr|Mrs|Ms|Dr|St|Mt|vs)\.$", re.I)
+
+
+def ends_sentence(text):
+    return bool(ENDS_SENTENCE.search(text)) and not ABBREV.match(text)
 MIN_WORD = 0.12
 
 
@@ -64,7 +70,7 @@ def main():
     for s, e in silences(audio, noise, min_d):
         cands = [i for i, w in enumerate(words) if i not in moved and (s + e) / 2 - 0.05 <= w["start"] <= e + 0.6]
         # (b) sentence-final word sitting in/just after the pause, with the next word after the pause: it belongs before
-        while cands and ENDS_SENTENCE.search(words[cands[0]]["text"]) and cands[0] + 1 < len(words) \
+        while cands and ends_sentence(words[cands[0]]["text"]) and cands[0] + 1 < len(words) \
                 and words[cands[0] + 1]["start"] >= e - 0.1:
             i = cands.pop(0)
             prev_end = words[i - 1]["end"] if i else 0.0

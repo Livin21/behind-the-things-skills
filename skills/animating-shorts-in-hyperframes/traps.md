@@ -14,8 +14,9 @@
 | 10 | `content_overlap` on a stamp over text, or on stacked swap tags | An intentional overlap | `data-layout-allow-overlap` on both elements |
 | 11 | Type-floor warning on tiny text | Decorative text, or normal text inside something later scaled down (a shrunken casing) | `data-layout-ignore` on it |
 | 12 | A fake barcode or QR code | Drawn by eye | Generate it from the spec in code; decode-test a rendered frame (for example with jsQR) |
-| 13 | A missing glyph (□) in a tag | The font lacks `→`, `−`, `≈` or `✓` | Check the glyphs in the font; draw arrows as SVG |
+| 13 | A missing glyph (□) in a tag | The font lacks `→`, `−`, `≈`, `×`, `’` or `✓` | Check the glyphs in the font; draw arrows as SVG |
 | 14 | "Inactive" icon parts are invisible | Shade-coloured fills on the paper background | Give inactive parts an ink-2 outline |
 | 15 | SVG `<text>` in the wrong font | `.tag` styles don't reach into SVG | Give SVG text its own font class |
 | 16 | Contrast or type check flags a counter or readout | `check` measures text at whatever value it holds at the sample time | Expected; confirm the final value visually |
 | 17 | A drawing jumps to the top-left when tweened | GSAP `x`/`y`/`scale` on an SVG `<g>` that has `transform="translate(...)"` replaces that translate | Tween an outer wrapper with no transform attribute; the inner group keeps the placement |
+| 18 | `check` warns `gsap_repeated_fromto_without_baseline` | Repeated `fromTo` pulses on one element (a button pressed several times) each render their start state immediately | Add `immediateRender: false` to every pulse after the first |
