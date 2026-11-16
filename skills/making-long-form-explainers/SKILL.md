@@ -80,7 +80,12 @@ No burned-in captions at 16:9. `python3 -I build_srt.py chapters.json ../<id>.en
 | `fix_timings.py` (before v4) could make a word end before it starts | Fixed: v4 skips the move and fails on inverted words |
 
 ## Release notes
-- Don't make a sub-10 MB upload copy (`encode_upload.sh` is for shorts). Browser upload tools may cap files at 10 MB, so the owner drags the high-quality master into YouTube Studio as Private; then the agent fills in title, description (with `timestamps.txt`), thumbnail (1280×720), SRT captions and the schedule.
+- Don't make a sub-10 MB upload copy (`encode_upload.sh` is for shorts). The browser extension's file upload caps at 10 MB, so **upload the master through a local server** (verified on L02, 198 MB, 16 Nov):
+  1. Once, the owner allows studio.youtube.com to reach the local network (Chrome asks the first time the page fetches from localhost).
+  2. Serve the master with `python3 -I template/serve_for_studio.py <folder>` (127.0.0.1:8791, sending `Access-Control-Allow-Origin: https://studio.youtube.com` and `Access-Control-Allow-Private-Network: true`).
+  3. On the upload page (`…/videos/upload?d=ud`), run in the page: fetch the file into a Blob, wrap it in a `File`, put it into the dialog's `input[type=file]` through a `DataTransfer`, and dispatch `change`. Do it in an async function that stores its status on `window` and returns at once, then poll; the JS tool times out at 45 s.
+  4. Fill in title, description (with `timestamps.txt`), thumbnail (1280×720), SRT captions and the schedule as below.
+  If the local route is unavailable, the owner drags the master into Studio as Private instead.
 - Chapters, A/B tests and pinned comments need YouTube **advanced features** (ID or video verification, about 24 h). Ask the owner on day one; ship with timestamps in the description anyway.
 - Shorts cut from the long video link to it as their Related Video (needs phone verification only).
 - On the website, a long-form entry embeds YouTube (click-to-load, privacy-enhanced) instead of hosting the file.
