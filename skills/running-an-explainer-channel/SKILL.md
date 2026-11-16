@@ -14,6 +14,7 @@ A channel is a production line: one fact-checked script, one consistent voice, o
 | 1 | Hook and script | scripting-explainer-shorts | The hook is verified; words ≤ 54 × voice pace; every claim and on-screen number has a source row |
 | 2 | Voice and timings | voicing-and-captioning-shorts | Narration normalised; timings repaired; differences flagged for a human; caption spec written |
 | 3 | Animation and render | animating-shorts-in-hyperframes | Check has 0 errors; two snapshot looks (step 7); render at 1080×1920/30 fps and −13 to −14.5 LUFS; frame 0 shows the object; cover and review sheet exported |
+| 3¼ | Sound pass | sound-designing-shorts | `renders/epNNN-slug-sound.mp4` mastered at −13.8 to −14.5 LUFS with 1.0–1.6 effects per second; the twist has a hand-placed `reveal` cue |
 | 3½ | Review | this skill (Producing a batch) | You have read the narration against `sources.md`, opened frame 0 and the review sheet; a human has heard the hook and every "listen at" moment before the release time |
 | 4 | Release | publishing-shorts | Scheduled on every platform the channel uses (publishing-shorts covers YouTube Shorts and Instagram Reels) and on the site, all for one release time; logged |
 | 5 | Measure | this skill (below) | 48 h and 7-day numbers logged for the episode |
@@ -32,8 +33,8 @@ Also decide:
 ## Producing a batch
 - Give each episode one subagent, which owns stages 1–3 in `episodes/NNN-slug/`.
 - The brief is the topic, the release date, the paths to these skills, and the instruction to read `CHANNEL.md`, `DESIGN.md` and one finished episode. If an agent needs more, put the missing fact in `CHANNEL.md` or the skill, not the brief.
-- **Report:** render path, duration, **render** loudness, hook (draft → final), partly verified claims, and the "listen at" moments.
-- **Folder at the end of stage 3:** `script.md`, `sources.md`, `narration.txt`, `video/{index.html, captions.spec.json, package.json, hyperframes.json, meta.json, assets/(narration.mp3, narration_norm.wav, transcript.json, transcript.raw.json, music.mp3, fonts/, grain.png), renders/(epNNN-slug.mp4, frame0.png, cover.jpg, review-sheet.jpg)}`.
+- **Report:** sound master path, duration, master loudness and effects per second, hook (draft → final), partly verified claims, and the "listen at" moments.
+- **Folder at the end of stage 3:** `script.md`, `sources.md`, `narration.txt`, `video/{index.html, captions.spec.json, package.json, hyperframes.json, meta.json, assets/(narration.mp3, narration_norm.wav, transcript.json, transcript.raw.json, music.mp3, fonts/, grain.png), sfx-cues.json, renders/(epNNN-slug.mp4, epNNN-slug-sound.mp4, frame0.png, cover.jpg, review-sheet.jpg)}`.
 - **Review every render yourself.** Read the narration against the sources (spot-check numbers against physics), look at the review sheet and frame 0, and send the owner the hook and the "listen at" moments (mm:ss) to hear. "Check passed" is not a review.
 - **Scheduling before the listen is allowed**, as long as the listen happens before the release time. If it finds a problem, fix it (one regeneration, see Spend), re-render, and replace the scheduled upload; if there isn't time, unschedule the episode everywhere, including the site's release time.
 - **Spend:** narration plus at most one regeneration per episode, and only for a clear mispronunciation, an overlong take or a factual fix.

@@ -12,6 +12,7 @@ Each skill is a folder with a `SKILL.md`, in the [Agent Skills](https://agentski
 | [`scripting-explainer-shorts`](skills/scripting-explainer-shorts/SKILL.md) | Writing or fact-checking a 45–60 s script, its hook and its sources |
 | [`voicing-and-captioning-shorts`](skills/voicing-and-captioning-shorts/SKILL.md) | TTS narration, loudness, word timings, speech-synced captions, a music bed |
 | [`animating-shorts-in-hyperframes`](skills/animating-shorts-in-hyperframes/SKILL.md) | Building the 1080×1920 animation in [HyperFrames](https://hyperframes.heygen.com) from a tested template |
+| [`sound-designing-shorts`](skills/sound-designing-shorts/SKILL.md) | Code-made sound effects timed from the animation's own timeline, the final mix and a −14 LUFS master |
 | [`publishing-shorts`](skills/publishing-shorts/SKILL.md) | Scheduling on YouTube Shorts, Instagram Reels and your site at one release time |
 | [`making-long-form-explainers`](skills/making-long-form-explainers/SKILL.md) | A 6–8 minute 16:9 explainer from the same pipeline: deciding, chapters, parallel chapter agents, music sections, SRT, release |
 

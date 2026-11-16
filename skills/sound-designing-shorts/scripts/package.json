@@ -1,0 +1,7 @@
+{
+  "name": "sound-designing-shorts",
+  "private": true,
+  "type": "module",
+  "description": "Sound pass for HyperFrames shorts: code-made effects kit, cue extraction from the timeline, v2 mix",
+  "dependencies": { "puppeteer-core": "24.10.2" }
+}

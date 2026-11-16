@@ -116,6 +116,9 @@
       var tl = gsap.timeline({ paused: true });
       var DUR = 12;
       var CUTS = [8]; // scene boundaries (seconds), one per transition
+      // Hand-placed sound cues for the sound pass (sound-designing-shorts): the twist gets sfx(t, "reveal").
+      window.__sfx = [];
+      function sfx(t, s, g) { window.__sfx.push({ t: t, s: s, g: g == null ? 1 : g }); }
 
       // Push-in, capped at 7% so long scenes don't grow into the caption zone.
       function push(stage, start, dur) {
@@ -139,7 +142,7 @@
       }
       function counter(el, from, to, start, dur, fmt, ease) {
         var o = { v: from }; el.textContent = fmt(from);
-        tl.to(o, { v: to, duration: dur, ease: ease || "none", onUpdate: function () { el.textContent = fmt(o.v); } }, start);
+        tl.to(o, { v: to, duration: dur, ease: ease || "none", data: "counter", onUpdate: function () { el.textContent = fmt(o.v); } }, start);
       }
 
       tl.to("#bg-grid", { x: -40, y: -40, duration: DUR, ease: "none" }, 0);
